@@ -26,5 +26,6 @@ the audio (like when there is music playing).
 - [ ] Add option to mute the app
 - [ ] Add other sounds to replace the whistle
 - [ ] Add points limiter
+- [ ] Translation
 
 Feel free to contribute by opening issues, PRs or forking!

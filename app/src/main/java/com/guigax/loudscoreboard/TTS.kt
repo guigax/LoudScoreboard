@@ -50,13 +50,12 @@ class TTS(
                         override fun onDone(utteranceID: String) {
                             if (utteranceID == "messageId" ){
                                 activity.runOnUiThread {
-                                    Log.v(TAG, "onDone before releaseAudioFocus")
                                     releaseAudioFocus()
-                                    Log.v(TAG, "onDone after releaseAudioFocus")
                                 }
                             }
                         }
 
+                        @Deprecated("Deprecated in Java")
                         override fun onError(utteranceID: String) {
                             //
                         }
@@ -65,7 +64,7 @@ class TTS(
                 speakOut(message)
             }
         } else {
-            Toast.makeText(activity, "Initilization Failed!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Initialization Failed!", Toast.LENGTH_SHORT).show()
         }
     }
 
