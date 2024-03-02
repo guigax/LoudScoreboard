@@ -32,8 +32,7 @@ class TTS(
 
     override fun onInit(i: Int) {
         if (i == TextToSpeech.SUCCESS) {
-            val localeBR = Locale("pt", "BR")
-            val result: Int = tts.setLanguage(localeBR)
+            val result: Int = tts.setLanguage(Locale.getDefault())
 
             tts.setSpeechRate(3f)
 
