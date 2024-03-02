@@ -9,6 +9,7 @@ the audio (like when there is music playing).
 - [x] Show score
 - [x] Add and subtract from score
 - [x] Reset button
+- [x] Swap button
 - [x] Whistle button
 - [x] Points announcement
 - [x] Teams announcement
