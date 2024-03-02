@@ -20,7 +20,6 @@ the audio (like when there is music playing).
 - [ ] Change background colors
 - [ ] Change announce order
 - [ ] Change points increment number
-- [ ] Change app name
 - [ ] Change app logo
 - [ ] Save changes locally
 - [ ] Add option to mute the app
