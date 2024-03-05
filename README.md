@@ -29,6 +29,6 @@ the audio (like when there is music playing).
 
 ## Credits
 
-DataStore logic from [delasign](https://www.delasign.com/blog/android-studio-kotlin-data-store/)
+- DataStore logic from [delasign](https://www.delasign.com/blog/android-studio-kotlin-data-store/)
 
 Feel free to contribute by opening issues, PRs or forking!
