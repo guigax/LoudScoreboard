@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <!-- Team 1 Section -->
     <LinearLayout
+        android:id="@+id/team1Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -14,15 +16,15 @@
         android:orientation="vertical">
 
         <!-- Team 1 Name -->
-        <EditText
+        <TextView
             android:id="@+id/team1Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:background="@android:color/transparent"
             android:paddingTop="20dp"
-            android:text="Time 1"
+            android:text="@string/team1DefaultName"
             android:textSize="24sp"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <!-- Team 1 Score -->
@@ -34,13 +36,13 @@
             android:gravity="center"
             android:text="0"
             android:textColor="@color/black"
-            android:textSize="150sp" />
+            android:textSize="150sp"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
-
             <ImageView
                 android:id="@+id/resetScore"
                 android:layout_width="wrap_content"
@@ -49,7 +51,6 @@
                 android:layout_weight="1"
                 android:contentDescription="Reset the score"
                 android:src="@drawable/reset" />
-
             <ImageView
                 android:id="@+id/swapScore"
                 android:layout_width="wrap_content"
@@ -59,7 +60,6 @@
                 android:contentDescription="Swap the scores of the teams"
                 android:rotation="90"
                 android:src="@drawable/swap" />
-
             <TextView
                 android:id="@+id/team1MinusScore"
                 android:layout_width="wrap_content"
@@ -76,6 +76,7 @@
 
     <!-- Team 2 Section -->
     <LinearLayout
+        android:id="@+id/team2Layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -84,15 +85,15 @@
         android:orientation="vertical">
 
         <!-- Team 2 Name -->
-        <EditText
+        <TextView
             android:id="@+id/team2Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:background="@android:color/transparent"
             android:paddingTop="20dp"
-            android:text="Time 2"
+            android:text="@string/team2DefaultName"
             android:textSize="24sp"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <!-- Team 2 Score -->
@@ -104,13 +105,13 @@
             android:gravity="center"
             android:text="0"
             android:textColor="@color/black"
-            android:textSize="150sp" />
+            android:textSize="150sp"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
-
             <TextView
                 android:id="@+id/team2MinusScore"
                 android:layout_width="wrap_content"
@@ -121,7 +122,6 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
             <ImageView
                 android:id="@+id/whistle"
                 android:layout_width="wrap_content"
@@ -129,7 +129,6 @@
                 android:layout_weight="1"
                 android:contentDescription="Sound a whistle"
                 android:src="@drawable/whistle" />
-
             <ImageView
                 android:id="@+id/settings"
                 android:layout_width="wrap_content"

@@ -17,16 +17,16 @@
         android:background="@android:color/holo_blue_dark">
 
         <!-- Team 1 Name -->
-        <EditText
+        <TextView
             android:id="@+id/team1Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time 1"
+            android:text="@string/team1DefaultName"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_weight="0.1"
             android:paddingTop="20dp"
-            android:background="@android:color/transparent"/>
+            android:textColor="@color/black" />
 
         <!-- Team 1 Score -->
         <TextView
@@ -37,7 +37,8 @@
             android:textSize="150sp"
             android:layout_weight="0.8"
             android:gravity="center"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,14 +49,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:src="@drawable/reset"
-                android:layout_alignParentStart="true"
                 android:layout_weight="1"
                 android:contentDescription="Reset the score" />
             <ImageView
                 android:id="@+id/swapScore"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_centerHorizontal="true"
                 android:src="@drawable/swap"
                 android:layout_weight="1"
                 android:contentDescription="Swap the scores of the teams" />
@@ -63,7 +62,6 @@
                 android:id="@+id/team1MinusScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="-1"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -71,7 +69,6 @@
                 android:textAlignment="center"
                 android:textStyle="bold" />
         </LinearLayout>
-
     </LinearLayout>
 
     <!-- Right side for Team 2 -->
@@ -85,16 +82,16 @@
         android:background="@android:color/holo_purple">
 
         <!-- Team 2 Name -->
-        <EditText
+        <TextView
             android:id="@+id/team2Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time 2"
+            android:text="@string/team2DefaultName"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_weight="0.1"
             android:paddingTop="20dp"
-            android:background="@android:color/transparent"/>
+            android:textColor="@color/black" />
 
         <!-- Team 2 Score -->
         <TextView
@@ -105,7 +102,8 @@
             android:textSize="150sp"
             android:layout_weight="0.8"
             android:gravity="center"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,5 +135,4 @@
                 android:contentDescription="Settings" />
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

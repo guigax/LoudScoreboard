@@ -22,10 +22,13 @@ the audio (like when there is music playing).
 - [ ] Change announce order
 - [ ] Change points increment number
 - [ ] Change app logo
-- [ ] Save changes locally
 - [ ] Add option to mute the app
 - [ ] Add other sounds to replace the whistle
 - [ ] Add points limiter
 - [ ] Translation
+
+## Credits
+
+DataStore logic from [delasign](https://www.delasign.com/blog/android-studio-kotlin-data-store/)
 
 Feel free to contribute by opening issues, PRs or forking!

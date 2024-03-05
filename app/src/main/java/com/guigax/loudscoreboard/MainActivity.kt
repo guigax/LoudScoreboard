@@ -8,25 +8,32 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.guigax.loudscoreboard.datacoordinator.DataCoordinator
+import com.guigax.loudscoreboard.datacoordinator.getTeam1NameDataStore
+import com.guigax.loudscoreboard.datacoordinator.getTeam1ScoreDataStore
+import com.guigax.loudscoreboard.datacoordinator.getTeam2NameDataStore
+import com.guigax.loudscoreboard.datacoordinator.getTeam2ScoreDataStore
+import com.guigax.loudscoreboard.datacoordinator.updateTeam1Score
+import com.guigax.loudscoreboard.datacoordinator.updateTeam2Score
+import com.guigax.loudscoreboard.fragment.BottomSheetDialogFragment
+import kotlinx.coroutines.runBlocking
+import java.time.Duration
 import java.util.LinkedList
 
 
 class MainActivity : AppCompatActivity() {
-    private val TAG: String = "MainActivity"
-
     private lateinit var team1ScoreV: TextView
     private lateinit var team2ScoreV: TextView
-    private lateinit var team1NameV: EditText
-    private lateinit var team2NameV: EditText
+    private lateinit var team1NameV: TextView
+    private lateinit var team2NameV: TextView
     private lateinit var team1MinusV: TextView
     private lateinit var team2MinusV: TextView
     private lateinit var swapScoreV: ImageView
     private lateinit var resetScoreV: ImageView
-    private lateinit var whistleV: ImageView
+    private lateinit var soundV: ImageView
     private lateinit var settingsV: ImageView
 
     private lateinit var audioManager: AudioManager
@@ -49,6 +56,16 @@ class MainActivity : AppCompatActivity() {
         .setOnAudioFocusChangeListener { }
         .build()
 
+    private val readTTSFromQueue = object : Runnable {
+        override fun run() {
+            if (ttsQueue.isNotEmpty()) {
+                TTS(this@MainActivity, ttsQueue.last, audioManager)
+            }
+            ttsQueue.clear()
+            mainHandler.postDelayed(this, Duration.ofSeconds(2).toMillis())
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -62,14 +79,13 @@ class MainActivity : AppCompatActivity() {
         team2MinusV = findViewById(R.id.team2MinusScore)
         swapScoreV = findViewById(R.id.swapScore)
         resetScoreV = findViewById(R.id.resetScore)
-        whistleV = findViewById(R.id.whistle)
+        soundV = findViewById(R.id.whistle)
         settingsV = findViewById(R.id.settings)
 
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         mainHandler = Handler(Looper.getMainLooper())
 
-        // Set initial scores
-        updateScores()
+        setupCoordinators()
 
         // Set click listeners
         settingsV.setOnClickListener { showSettingsDialog() }
@@ -78,32 +94,46 @@ class MainActivity : AppCompatActivity() {
         team1ScoreV.setOnClickListener { incrementTeamScore(1) }
         team2ScoreV.setOnClickListener { incrementTeamScore(2) }
         team1MinusV.setOnClickListener {
-            if (team1Score >= 0) {
+            if (team1Score > 0) {
                 decreaseTeamScore(1)
             }
         }
         team2MinusV.setOnClickListener {
-            if (team2Score >= 0) {
+            if (team2Score > 0) {
                 decreaseTeamScore(2)
             }
         }
 
         mediaPlayer = MediaPlayer.create(this, R.raw.whistle)
         mediaPlayer.setOnCompletionListener { audioManager.abandonAudioFocusRequest(focusRequest) }
+        soundV.setOnClickListener {
+            playSound()
+        }
+    }
 
-        whistleV.setOnClickListener {
-            val result = audioManager.requestAudioFocus(focusRequest)
-            // Check if the MediaPlayer is playing, stop and reset it
-            if (mediaPlayer.isPlaying) {
-                mediaPlayer.stop()
-                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-                    mediaPlayer.reset()
-                }
-            }
-            // Start playing the sound
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (!hasFocus) {
+            return
+        }
+
+        runBlocking {
+            getNamesFromData()
+        }
+    }
+
+    private fun playSound() {
+        val result = audioManager.requestAudioFocus(focusRequest)
+        // Check if the MediaPlayer is playing, stop and reset it
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
             if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-                mediaPlayer.start()
+                mediaPlayer.reset()
             }
+        }
+        // Start playing the sound
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+            mediaPlayer.start()
         }
     }
 
@@ -117,17 +147,22 @@ class MainActivity : AppCompatActivity() {
         mainHandler.post(readTTSFromQueue)
     }
 
-    private val readTTSFromQueue = object : Runnable {
-        override fun run() {
-            if (ttsQueue.isNotEmpty()) {
-                TTS(this@MainActivity, ttsQueue.last, audioManager)
-            }
-            ttsQueue.clear()
-            mainHandler.postDelayed(this, 2000)
-        }
+    private suspend fun getNamesFromData() {
+        team1NameV.text = DataCoordinator.shared.getTeam1NameDataStore()
+        team2NameV.text = DataCoordinator.shared.getTeam2NameDataStore()
     }
 
+    private suspend fun getScoreFromData() {
+        team1Score = DataCoordinator.shared.getTeam1ScoreDataStore()
+        team2Score = DataCoordinator.shared.getTeam2ScoreDataStore()
+
+        team1ScoreV.text = team1Score.toString()
+        team2ScoreV.text = team2Score.toString()
+    }
     private fun updateScores() {
+        DataCoordinator.shared.updateTeam1Score(team1Score)
+        DataCoordinator.shared.updateTeam2Score(team2Score)
+
         team1ScoreV.text = team1Score.toString()
         team2ScoreV.text = team2Score.toString()
 
@@ -173,5 +208,17 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
+    }
+
+    private fun setupCoordinators() {
+        DataCoordinator.shared.initialize(
+            context = baseContext,
+            onLoad = {
+                runBlocking {
+                    getScoreFromData()
+                    getNamesFromData()
+                }
+            }
+        )
     }
 }

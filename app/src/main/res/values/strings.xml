@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Loud Scoreboard</string>
+    <string name="team1DefaultName">Equipe 1</string>
+    <string name="team2DefaultName">Equipe 2</string>
 </resources>

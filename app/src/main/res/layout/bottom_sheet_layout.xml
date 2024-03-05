@@ -1,43 +1,149 @@
-<!-- bottom_sheet_layout.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="First Team"/>
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <EditText
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="" />
-
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Second Team"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <EditText
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WORK IN PROGRESS"
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:autofillHints="" />
-    </RelativeLayout>
+            android:layout_marginTop="8dp"
+            android:text="Team 1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/team1Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="Name for the Team 1"
+            android:hint="Enter name for Team 1"
+            android:inputType="text"
+            android:maxLines="1" />
 
+        <Button
+            android:id="@+id/team1Color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="Color for Team 1" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Team 2"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/team2Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="Name for Team 2"
+            android:hint="Enter name for Team 2"
+            android:inputType="text"
+            android:maxLines="1" />
+
+        <Button
+            android:id="@+id/team2Color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/holo_purple"
+            android:text="Color for Team 2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Choose the sound"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/sound"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            android:popupBackground="@android:color/darker_gray" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/minValueLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/minValueLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Minimum Value"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/minValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/minValueLabel"
+                    android:layout_marginTop="8dp"
+                    android:hint="Enter minimum value"
+                    android:inputType="number" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/maxValueLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/minValueLayout">
+
+                <TextView
+                    android:id="@+id/maxValueLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Maximum Value"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/maxValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/maxValueLabel"
+                    android:layout_marginTop="8dp"
+                    android:hint="Enter maximum value"
+                    android:inputType="number" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <CheckBox
+            android:id="@+id/mute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Mute" />
+    </LinearLayout>
+</ScrollView>
