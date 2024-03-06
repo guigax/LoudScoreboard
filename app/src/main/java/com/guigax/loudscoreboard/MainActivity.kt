@@ -31,9 +31,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var team2NameV: TextView
     private lateinit var team1MinusV: TextView
     private lateinit var team2MinusV: TextView
-    private lateinit var swapScoreV: ImageView
-    private lateinit var resetScoreV: ImageView
-    private lateinit var soundV: ImageView
+    private lateinit var resetV: ImageView
+    private lateinit var announceV: ImageView
+    private lateinit var swapV: ImageView
+    private lateinit var whistleV: ImageView
     private lateinit var settingsV: ImageView
 
     private lateinit var audioManager: AudioManager
@@ -77,9 +78,12 @@ class MainActivity : AppCompatActivity() {
         team2NameV = findViewById(R.id.team2Name)
         team1MinusV = findViewById(R.id.team1MinusScore)
         team2MinusV = findViewById(R.id.team2MinusScore)
-        swapScoreV = findViewById(R.id.swapScore)
-        resetScoreV = findViewById(R.id.resetScore)
-        soundV = findViewById(R.id.whistle)
+
+        resetV = findViewById(R.id.resetScore)
+        announceV = findViewById(R.id.announceScore)
+        swapV = findViewById(R.id.swapScore)
+        resetV = findViewById(R.id.resetScore)
+        whistleV = findViewById(R.id.whistle)
         settingsV = findViewById(R.id.settings)
 
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -88,27 +92,18 @@ class MainActivity : AppCompatActivity() {
         setupCoordinators()
 
         // Set click listeners
-        settingsV.setOnClickListener { showSettingsDialog() }
-        swapScoreV.setOnClickListener { swapScores() }
-        resetScoreV.setOnClickListener { resetScore() }
         team1ScoreV.setOnClickListener { incrementTeamScore(1) }
         team2ScoreV.setOnClickListener { incrementTeamScore(2) }
-        team1MinusV.setOnClickListener {
-            if (team1Score > 0) {
-                decreaseTeamScore(1)
-            }
-        }
-        team2MinusV.setOnClickListener {
-            if (team2Score > 0) {
-                decreaseTeamScore(2)
-            }
-        }
+        team1MinusV.setOnClickListener { decreaseTeamScore(1) }
+        team2MinusV.setOnClickListener { decreaseTeamScore(2) }
 
         mediaPlayer = MediaPlayer.create(this, R.raw.whistle)
         mediaPlayer.setOnCompletionListener { audioManager.abandonAudioFocusRequest(focusRequest) }
-        soundV.setOnClickListener {
-            playSound()
-        }
+        whistleV.setOnClickListener { playSound() }
+        resetV.setOnClickListener { resetScore() }
+        announceV.setOnClickListener { announceScore() }
+        swapV.setOnClickListener { swapScores() }
+        settingsV.setOnClickListener { showSettingsDialog() }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -180,8 +175,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun decreaseTeamScore(teamNumber: Int) {
         when (teamNumber) {
-            1 -> team1Score--
-            2 -> team2Score--
+            1 -> if (team1Score > 0) team1Score--
+            2 -> if (team2Score > 0) team2Score--
         }
         updateScores()
     }
@@ -198,6 +193,11 @@ class MainActivity : AppCompatActivity() {
         team1Score = 0
         team2Score = 0
         updateScores()
+    }
+
+    private fun announceScore() {
+        ttsQueue.clear()
+        ttsQueue.add("$team1Score para ${team1NameV.text}. A, $team2Score para ${team2NameV.text}")
     }
 
     private fun showSettingsDialog() {

@@ -47,27 +47,36 @@
             <ImageView
                 android:id="@+id/resetScore"
                 android:layout_width="wrap_content"
-                android:layout_height="28dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/reset"
                 android:layout_weight="1"
                 android:contentDescription="Reset the score" />
+
+            <ImageView
+                android:id="@+id/announceScore"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="Announce the score"
+                android:src="@drawable/score" />
             <ImageView
                 android:id="@+id/swapScore"
                 android:layout_width="wrap_content"
-                android:layout_height="28dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/swap"
                 android:layout_weight="1"
                 android:contentDescription="Swap the scores of the teams" />
             <TextView
                 android:id="@+id/team1MinusScore"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="-1"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:autoSizeTextType="uniform"
                 android:layout_weight="1"
                 android:textAlignment="center"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </LinearLayout>
 
@@ -112,24 +121,25 @@
             <TextView
                 android:id="@+id/team2MinusScore"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="-1"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:autoSizeTextType="uniform"
                 android:layout_weight="1"
                 android:textAlignment="center"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
             <ImageView
                 android:id="@+id/whistle"
                 android:layout_width="wrap_content"
-                android:layout_height="28sp"
+                android:layout_height="match_parent"
                 android:src="@drawable/whistle"
                 android:layout_weight="1"
                 android:contentDescription="Sound a whistle" />
             <ImageView
                 android:id="@+id/settings"
                 android:layout_width="wrap_content"
-                android:layout_height="28sp"
+                android:layout_height="match_parent"
                 android:src="@drawable/settings"
                 android:layout_weight="1"
                 android:contentDescription="Settings" />
