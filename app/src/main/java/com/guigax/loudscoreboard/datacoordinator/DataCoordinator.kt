@@ -2,7 +2,6 @@ package com.guigax.loudscoreboard.datacoordinator
 
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
-import com.guigax.loudscoreboard.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,11 +14,9 @@ class DataCoordinator {
 
     var context: Context? = null
     var team1NamePreferenceVariable: String = ""
-    val defaultTeam1NamePreferenceValue: String =
-        context?.getString(R.string.team1DefaultName) ?: ""
+    val defaultTeam1NamePreferenceValue: String = "Equipe 1"
     var team2NamePreferenceVariable: String = ""
-    val defaultTeam2NamePreferenceValue: String =
-        context?.getString(R.string.team2DefaultName) ?: ""
+    val defaultTeam2NamePreferenceValue: String = "Equipe 2"
 
     var team1ScorePreferenceVariable: Int = 0
     val defaultTeam1ScorePreferenceVariable: Int = 0
