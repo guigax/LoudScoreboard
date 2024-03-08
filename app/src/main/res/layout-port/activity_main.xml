@@ -46,7 +46,6 @@
                 android:layout_weight="1"
                 android:contentDescription="Reset the score"
                 android:src="@drawable/reset" />
-
             <ImageView
                 android:id="@+id/announceScore"
                 android:layout_width="wrap_content"

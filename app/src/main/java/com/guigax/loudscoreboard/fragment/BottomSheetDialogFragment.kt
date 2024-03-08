@@ -69,8 +69,7 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
         Log.v(BottomSheetDialogFragment::class.qualifiedName, "onCancel triggered")
 
         runBlocking {
-            DataCoordinator.shared.setTeam1NameDataStore(team1NameV.text.toString())
-            DataCoordinator.shared.setTeam2NameDataStore(team2NameV.text.toString())
+            setNames()
         }
     }
 
@@ -85,6 +84,11 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
                 }
             )
         }
+    }
+
+    private suspend fun setNames() {
+        DataCoordinator.shared.setTeam1NameDataStore(team1NameV.text.toString())
+        DataCoordinator.shared.setTeam2NameDataStore(team2NameV.text.toString())
     }
 
     private suspend fun getNamesFromData() {
