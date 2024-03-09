@@ -24,7 +24,7 @@ import com.guigax.loudscoreboard.datacoordinator.setTeam1NameDataStore
 import com.guigax.loudscoreboard.datacoordinator.setTeam2NameDataStore
 import com.guigax.loudscoreboard.datacoordinator.updateTeam1Score
 import com.guigax.loudscoreboard.datacoordinator.updateTeam2Score
-import com.guigax.loudscoreboard.fragment.BottomSheetDialogFragment
+import com.guigax.loudscoreboard.fragment.SettingsFragment
 import kotlinx.coroutines.runBlocking
 import java.time.Duration
 import java.util.LinkedList
@@ -276,8 +276,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showSettingsDialog() {
-        val bottomSheetDialogFragment = BottomSheetDialogFragment()
-        bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
+        val settingsFragment = SettingsFragment()
+        settingsFragment.show(supportFragmentManager, settingsFragment.tag)
     }
 
     private fun resetTeamsNames() {

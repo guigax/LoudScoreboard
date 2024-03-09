@@ -21,7 +21,7 @@ import com.guigax.loudscoreboard.datacoordinator.setTeam2NameDataStore
 import kotlinx.coroutines.runBlocking
 
 
-class BottomSheetDialogFragment : BottomSheetDialogFragment() {
+class SettingsFragment : BottomSheetDialogFragment(), ColorPickerDialog.ColorPickerListener {
     private lateinit var team1ColorV: Button
     private lateinit var team2ColorV: Button
     private lateinit var team1NameV: EditText
@@ -34,9 +34,7 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragmentView = inflater.inflate(R.layout.bottom_sheet_layout, container, false)
-
-        setupCoordinators()
+        val fragmentView = inflater.inflate(R.layout.settings_layout, container, false)
 
         val spinner: Spinner = fragmentView.findViewById(R.id.sound)
         val images = arrayOf(R.drawable.whistle, R.drawable.ding, R.drawable.horn)
@@ -48,12 +46,10 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
         team1NameV = fragmentView.findViewById(R.id.team1Name)
         team2NameV = fragmentView.findViewById(R.id.team2Name)
 
+        setupCoordinators()
+
         team1ColorV.setOnClickListener {
-            Toast.makeText(
-                fragmentView.context,
-                "Not yet",
-                Toast.LENGTH_SHORT
-            ).show()
+            showColorFragment()
         }
         team2ColorV.setOnClickListener {
             Toast.makeText(
@@ -103,5 +99,14 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
     private fun updateTeamsNames() {
         team1NameV.setText(team1CurrentName)
         team2NameV.setText(team2CurrentName)
+    }
+
+    private fun showColorFragment() {
+        val colorPickerDialog = ColorPickerDialog()
+        colorPickerDialog.show(getParentFragmentManager(), colorPickerDialog.tag)
+    }
+
+    override fun onColorSelected(color: Int) {
+        TODO("Not yet implemented")
     }
 }
