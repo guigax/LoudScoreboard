@@ -13,7 +13,7 @@ suspend fun DataCoordinator.getTeam1NameDataStore(): String {
 suspend fun DataCoordinator.setTeam1NameDataStore(value: String) {
     val context = this.context ?: return
     context.dataStore.edit { preferences ->
-        preferences[PreferencesKeys.team1Name] = value
+        preferences[PreferencesKeys.team1Name] = value.ifEmpty { defaultTeam1NamePreferenceValue }
     }
 }
 
@@ -26,7 +26,7 @@ suspend fun DataCoordinator.getTeam2NameDataStore(): String {
 suspend fun DataCoordinator.setTeam2NameDataStore(value: String) {
     val context = this.context ?: return
     context.dataStore.edit { preferences ->
-        preferences[PreferencesKeys.team2Name] = value
+        preferences[PreferencesKeys.team2Name] = value.ifEmpty { defaultTeam2NamePreferenceValue }
     }
 }
 
