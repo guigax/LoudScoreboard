@@ -32,8 +32,9 @@ import java.util.LinkedList
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        val DEFAULT_DURATION_INCREASE_SCORE: Duration = Duration.ofMillis(1500)
+        val DEFAULT_DURATION_INCREASE_SCORE: Duration = Duration.ofMillis(1000)
         val DEFAULT_DURATION_DECREASE_SCORE: Duration = Duration.ofMillis(4000)
+        val DURATION_NOW: Duration = Duration.ZERO
     }
 
     private lateinit var team1ScoreV: TextView
@@ -56,6 +57,8 @@ class MainActivity : AppCompatActivity() {
 
     private var team1CurrentScore = 0
     private var team2CurrentScore = 0
+    private var team1CurrentName = ""
+    private var team2CurrentName = ""
 
     private var ttsQueue: LinkedList<String> = LinkedList<String>()
     private val handler = Handler()
@@ -99,6 +102,8 @@ class MainActivity : AppCompatActivity() {
         runBlocking {
             getNamesFromData()
         }
+
+        updateTeamsNames()
     }
 
     override fun onPause() {
@@ -130,6 +135,8 @@ class MainActivity : AppCompatActivity() {
         resetV = findViewById(R.id.resetScore)
         whistleV = findViewById(R.id.whistle)
         settingsV = findViewById(R.id.settings)
+
+        updateScores(speak = false)
     }
 
     private fun setListeners() {
@@ -144,12 +151,12 @@ class MainActivity : AppCompatActivity() {
         }
         resetV.setOnClickListener { resetScore() }
         resetV.setOnLongClickListener {
-            resetScore()
             resetTeamsNames()
+            resetScore()
             vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
             return@setOnLongClickListener true
         }
-        announceV.setOnClickListener { announceScore() }
+        announceV.setOnClickListener { announceScore(DURATION_NOW) }
         swapV.setOnClickListener { swapScores() }
         swapV.setOnLongClickListener {
             swapTeamsNames()
@@ -193,14 +200,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private suspend fun getNamesFromData() {
-        team1NameV.text = DataCoordinator.shared.getTeam1NameDataStore()
-        team2NameV.text = DataCoordinator.shared.getTeam2NameDataStore()
+        team1CurrentName = DataCoordinator.shared.getTeam1NameDataStore()
+        team2CurrentName = DataCoordinator.shared.getTeam2NameDataStore()
     }
 
     private suspend fun getScoreFromData() {
         team1CurrentScore = DataCoordinator.shared.getTeam1ScoreDataStore()
         team2CurrentScore = DataCoordinator.shared.getTeam2ScoreDataStore()
-        updateScores(speak = false)
     }
 
     private fun updateScores(
@@ -216,6 +222,11 @@ class MainActivity : AppCompatActivity() {
         if (speak) {
             announceScore(delay)
         }
+    }
+
+    private fun updateTeamsNames() {
+        team1NameV.text = team1CurrentName
+        team2NameV.text = team2CurrentName
     }
 
     private fun incrementTeamScore(teamNumber: Int) {
@@ -248,6 +259,7 @@ class MainActivity : AppCompatActivity() {
             DataCoordinator.shared.setTeam2NameDataStore(team1NameV.text.toString())
             getNamesFromData()
         }
+        updateTeamsNames()
     }
 
     private fun resetScore() {
@@ -274,6 +286,7 @@ class MainActivity : AppCompatActivity() {
             DataCoordinator.shared.setTeam2NameDataStore("")
             getNamesFromData()
         }
+        updateTeamsNames()
     }
 
     private fun setupCoordinators() {

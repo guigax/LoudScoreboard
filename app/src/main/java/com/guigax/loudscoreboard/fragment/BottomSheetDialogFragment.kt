@@ -26,6 +26,9 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var team2ColorV: Button
     private lateinit var team1NameV: EditText
     private lateinit var team2NameV: EditText
+
+    private var team1CurrentName = ""
+    private var team2CurrentName = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -81,6 +84,7 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
                     runBlocking {
                         getNamesFromData()
                     }
+                    updateTeamsNames()
                 }
             )
         }
@@ -92,7 +96,12 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private suspend fun getNamesFromData() {
-        team1NameV.setText(DataCoordinator.shared.getTeam1NameDataStore())
-        team2NameV.setText(DataCoordinator.shared.getTeam2NameDataStore())
+        team1CurrentName = DataCoordinator.shared.getTeam1NameDataStore()
+        team2CurrentName = DataCoordinator.shared.getTeam2NameDataStore()
+    }
+
+    private fun updateTeamsNames() {
+        team1NameV.setText(team1CurrentName)
+        team2NameV.setText(team2CurrentName)
     }
 }
