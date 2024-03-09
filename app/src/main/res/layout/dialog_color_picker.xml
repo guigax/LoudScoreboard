@@ -9,7 +9,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/circle"
         android:contentDescription="Color circle" />
 
     <ImageView
@@ -17,7 +16,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/circle"
         android:contentDescription="Color circle" />
 
     <ImageView
@@ -25,7 +23,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/circle"
         android:contentDescription="Color circle" />
 
     <ImageView
@@ -33,7 +30,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/circle"
         android:contentDescription="Color circle" />
 
     <ImageView
@@ -41,7 +37,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/circle"
         android:contentDescription="Color circle" />
 
 

@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="@android:color/holo_blue_dark">
+        android:background="@android:color/holo_blue_light">
 
         <!-- Team 1 Name -->
         <TextView
