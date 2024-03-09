@@ -13,12 +13,11 @@ the audio (like when there is music playing).
 - [x] Whistle button
 - [x] Points announcement
 - [x] Teams announcement
+- [x] Change background colors
 - [x] Settings screen (WIP)
 
 ## TODO
 
-- [ ] Improve changing the name of the teams
-- [ ] Change background colors
 - [ ] Change announce order
 - [ ] Change points increment number
 - [ ] Change app logo
@@ -30,5 +29,6 @@ the audio (like when there is music playing).
 ## Credits
 
 - DataStore logic from [delasign](https://www.delasign.com/blog/android-studio-kotlin-data-store/)
+- Icons from [Google Fonts](https://fonts.google.com/icons)
 
 Feel free to contribute by opening issues, PRs or forking!
