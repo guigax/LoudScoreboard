@@ -24,13 +24,14 @@ import com.guigax.loudscoreboard.datacoordinator.setTeam1NameDataStore
 import com.guigax.loudscoreboard.datacoordinator.setTeam2NameDataStore
 import com.guigax.loudscoreboard.datacoordinator.updateTeam1Score
 import com.guigax.loudscoreboard.datacoordinator.updateTeam2Score
+import com.guigax.loudscoreboard.fragment.ColorPickerDialog
 import com.guigax.loudscoreboard.fragment.SettingsFragment
 import kotlinx.coroutines.runBlocking
 import java.time.Duration
 import java.util.LinkedList
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ColorPickerDialog.ColorPickerListener {
     companion object {
         val DEFAULT_DURATION_INCREASE_SCORE: Duration = Duration.ofMillis(1000)
         val DEFAULT_DURATION_DECREASE_SCORE: Duration = Duration.ofMillis(4000)
@@ -63,8 +64,6 @@ class MainActivity : AppCompatActivity() {
     private var ttsQueue: LinkedList<String> = LinkedList<String>()
     private val handler = Handler()
     private var runnable: Runnable? = null
-
-
 
     private val focusRequest = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
         .setAudioAttributes(
@@ -104,6 +103,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         updateTeamsNames()
+        updateTeamsScore()
     }
 
     override fun onPause() {
@@ -136,7 +136,8 @@ class MainActivity : AppCompatActivity() {
         whistleV = findViewById(R.id.whistle)
         settingsV = findViewById(R.id.settings)
 
-        updateScores(speak = false)
+        updateTeamsScore()
+        updateTeamsNames()
     }
 
     private fun setListeners() {
@@ -186,14 +187,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun playSound() {
         val result = audioManager.requestAudioFocus(focusRequest)
-        // Check if the MediaPlayer is playing, stop and reset it
         if (mediaPlayer.isPlaying) {
             mediaPlayer.stop()
             if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
                 mediaPlayer.reset()
             }
         }
-        // Start playing the sound
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
             mediaPlayer.start()
         }
@@ -210,23 +209,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateScores(
-        speak: Boolean = true,
         delay: Duration = DEFAULT_DURATION_INCREASE_SCORE
     ) {
         DataCoordinator.shared.updateTeam1Score(team1CurrentScore)
         DataCoordinator.shared.updateTeam2Score(team2CurrentScore)
 
-        team1ScoreV.text = team1CurrentScore.toString()
-        team2ScoreV.text = team2CurrentScore.toString()
-
-        if (speak) {
-            announceScore(delay)
-        }
+        updateTeamsScore()
+        announceScore(delay)
     }
 
     private fun updateTeamsNames() {
         team1NameV.text = team1CurrentName
         team2NameV.text = team2CurrentName
+    }
+
+    private fun updateTeamsScore() {
+        team1ScoreV.text = team1CurrentScore.toString()
+        team2ScoreV.text = team2CurrentScore.toString()
     }
 
     private fun incrementTeamScore(teamNumber: Int) {
@@ -291,7 +290,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupCoordinators() {
         DataCoordinator.shared.initialize(
-            context = baseContext,
+            context = this,
             onLoad = {
                 runBlocking {
                     getScoreFromData()
@@ -299,5 +298,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    override fun onColorSelected(color: Int) {
+        TODO("Not yet implemented")
+        // get current color from data
+        // set layout color
     }
 }
