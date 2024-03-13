@@ -5,16 +5,11 @@ import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.media.MediaPlayer
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.os.VibrationEffect
-import android.os.Vibrator
-import android.os.VibratorManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.guigax.loudscoreboard.datacoordinator.DataCoordinator
@@ -59,10 +54,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var settingsV: ImageView
 
     private lateinit var audioManager: AudioManager
-    private lateinit var vibratorManager: VibratorManager
+    //private lateinit var vibratorManager: VibratorManager
 
     private lateinit var mediaPlayer: MediaPlayer
-    private lateinit var vibrator: Vibrator
+    //private lateinit var vibrator: Vibrator
 
     private var team1CurrentName = ""
     private var team2CurrentName = ""
@@ -87,7 +82,6 @@ class MainActivity : AppCompatActivity() {
         .setOnAudioFocusChangeListener { }
         .build()
 
-    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -96,8 +90,8 @@ class MainActivity : AppCompatActivity() {
         setupCoordinators()
 
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        vibratorManager = getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-        vibrator = vibratorManager.defaultVibrator
+        //vibratorManager = getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+        //vibrator = vibratorManager.defaultVibrator
         mediaPlayer = MediaPlayer.create(this, R.raw.whistle)
 
         setListeners()
@@ -171,7 +165,7 @@ class MainActivity : AppCompatActivity() {
         resetV.setOnLongClickListener {
             resetTeamsNames()
             resetScore()
-            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+            //vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
             return@setOnLongClickListener true
         }
         announceV.setOnClickListener { announceScore(DURATION_NOW) }
@@ -179,7 +173,7 @@ class MainActivity : AppCompatActivity() {
         swapV.setOnLongClickListener {
             swapTeamsNames()
             swapScores()
-            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+            //vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
             return@setOnLongClickListener true
         }
         settingsV.setOnClickListener { showSettingsDialog() }
