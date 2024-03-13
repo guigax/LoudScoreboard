@@ -4,6 +4,9 @@ This app was born from the necessity of a scoreboard app that announced the scor
 text-to-speech function, the ones that I have found with similar function did not get the focus for
 the audio (like when there is music playing).
 
+One thing that also distinguish it from other apps is that it shows on the lock screen, so if you
+want to pass your cellphone to another person to mark down the score, you can lock your phone.
+
 ## Features
 
 - [x] Show score
