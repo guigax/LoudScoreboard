@@ -14,16 +14,21 @@ the audio (like when there is music playing).
 - [x] Points announcement
 - [x] Teams announcement
 - [x] Change background colors
-- [x] Settings screen (WIP)
+- [x] Settings screen
 
 ## TODO
 
-- [ ] Change announce order
+- [ ] Option to disable vibrations
+- [ ] More colors
+- [ ] TTS pitch slider
+- [ ] Timer
+- [ ] Floating window
 - [ ] Change points increment number
 - [ ] Change app logo
-- [ ] Add option to mute the app
 - [ ] Add other sounds to replace the whistle
 - [ ] Add points limiter
+- [ ] Change announce order
+- [ ] Externalize the strings
 - [ ] Translation
 
 ## Credits

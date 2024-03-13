@@ -25,6 +25,14 @@ class DataCoordinator {
     var team2ScorePreferenceVariable: Int = 0
     val defaultTeam2ScorePreferenceVariable: Int = 0
 
+    var team1ColorPreferenceVariable: Int = 0
+    val defaultTeam1ColorPreferenceVariable: Int = android.R.color.holo_blue_light
+    var team2ColorPreferenceVariable: Int = 0
+    val defaultTeam2ColorPreferenceVariable: Int = android.R.color.holo_purple
+
+    var isMutedPreferenceVariable: Boolean = false
+    val defaultIsMutedPreferenceVariable: Boolean = false
+
     val Context.dataStore by preferencesDataStore(
         name = USER_PREFERENCES_NAME
     )
@@ -41,6 +49,11 @@ class DataCoordinator {
 
             team1ScorePreferenceVariable = getTeam1ScoreDataStore()
             team2ScorePreferenceVariable = getTeam2ScoreDataStore()
+
+            team1ColorPreferenceVariable = getTeam1ColorDataStore()
+            team2ColorPreferenceVariable = getTeam2ColorDataStore()
+
+            isMutedPreferenceVariable = getIsMuted()
             // Callback
             onLoad()
         }

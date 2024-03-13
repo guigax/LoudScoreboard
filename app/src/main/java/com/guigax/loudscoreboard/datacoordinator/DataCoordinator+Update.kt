@@ -43,3 +43,33 @@ fun DataCoordinator.updateTeam2Score(value: Int) {
         setTeam2ScoreDataStore(value)
     }
 }
+
+fun DataCoordinator.updateTeam1Color(value: Int) {
+    // Update Value
+    this.team1ColorPreferenceVariable = value
+    // Save to System
+    GlobalScope.launch(Dispatchers.Default) {
+        // Update DataStore
+        setTeam1ColorDataStore(value)
+    }
+}
+
+fun DataCoordinator.updateTeam2Color(value: Int) {
+    // Update Value
+    this.team2ColorPreferenceVariable = value
+    // Save to System
+    GlobalScope.launch(Dispatchers.Default) {
+        // Update DataStore
+        setTeam2ColorDataStore(value)
+    }
+}
+
+fun DataCoordinator.updateIsMuted(value: Boolean) {
+    // Update Value
+    this.isMutedPreferenceVariable = value
+    // Save to System
+    GlobalScope.launch(Dispatchers.Default) {
+        // Update DataStore
+        setIsMuted(value)
+    }
+}
