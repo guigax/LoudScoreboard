@@ -311,8 +311,16 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        val ttsPhrase = baseContext.getString(
+            R.string.tts_default_phrase,
+            team1CurrentScore,
+            team1NameV.text,
+            team2CurrentScore,
+            team2NameV.text
+        )
+
         ttsQueue.clear()
-        ttsQueue.add("$team1CurrentScore para ${team1NameV.text}. A, $team2CurrentScore para ${team2NameV.text}")
+        ttsQueue.add(ttsPhrase)
         cancelPendingTTS()
         scheduleTTS(delay)
     }

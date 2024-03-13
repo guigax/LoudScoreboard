@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Team 1"
+            android:text="@string/team1DefaultName"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:autofillHints="Name for the Team 1"
-            android:hint="Enter name for Team 1"
+            android:hint="@string/enter_name_for_team_1"
             android:inputType="text"
             android:maxLines="1" />
 
@@ -33,14 +33,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="Color for Team 1"
+            android:text="@string/color_for_team_1"
             android:textColor="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Team 2"
+            android:text="@string/team1DefaultName"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:autofillHints="Name for Team 2"
-            android:hint="Enter name for Team 2"
+            android:hint="@string/enter_name_for_team_2"
             android:inputType="text"
             android:maxLines="1" />
 
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/holo_purple"
-            android:text="Color for Team 2"
+            android:text="@string/color_for_team_2"
             android:textColor="@color/black" />
 
         <LinearLayout
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Choose the sound"
+                android:text="@string/choose_the_sound"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -86,7 +86,7 @@
                 android:popupBackground="@android:color/darker_gray" />
         </LinearLayout>
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone">
@@ -140,13 +140,13 @@
                     android:inputType="number" />
             </RelativeLayout>
 
-        </RelativeLayout>
+        </RelativeLayout>-->
 
         <CheckBox
             android:id="@+id/mute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Mute" />
+            android:text="@string/mute" />
     </LinearLayout>
 </ScrollView>

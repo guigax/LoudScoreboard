@@ -3,6 +3,7 @@ package com.guigax.loudscoreboard.dialogs
 import android.content.Context
 import android.graphics.drawable.Drawable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.guigax.loudscoreboard.R
 import com.guigax.loudscoreboard.adapters.ColorItemAdapter
 import com.guigax.loudscoreboard.datacoordinator.DataCoordinator
 import com.guigax.loudscoreboard.datacoordinator.getTeam1NameDataStore
@@ -40,8 +41,10 @@ class ColorPickerDialog(private val context: Context) {
             }
         }
 
+        val pickAColorFor = context.getString(R.string.pick_a_color_for)
+
         dialogBuilder
-            .setTitle("Pick a color for \"$teamName\"")
+            .setTitle("$pickAColorFor \"$teamName\"")
             .setAdapter(adapter) { _, which ->
                 if (teamNumber == 1) {
                     DataCoordinator.shared.updateTeam1Color(ColorOptions.colors[which])

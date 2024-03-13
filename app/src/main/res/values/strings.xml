@@ -1,5 +1,18 @@
 <resources>
     <string name="app_name">Loud Scoreboard</string>
-    <string name="team1DefaultName">Equipe 1</string>
-    <string name="team2DefaultName">Equipe 2</string>
+    <string name="team1DefaultName">Team 1</string>
+    <string name="team2DefaultName">Team 2</string>
+    <string name="reset_the_score">Reset the score</string>
+    <string name="announce_the_score">Announce the score</string>
+    <string name="swap_the_scores_of_the_teams">Swap the scores of the teams</string>
+    <string name="blow_a_whistle">Blow a whistle</string>
+    <string name="settings">Settings</string>
+    <string name="enter_name_for_team_1">Enter name for Team 1</string>
+    <string name="enter_name_for_team_2">Enter name for Team 2</string>
+    <string name="color_for_team_1">Color for Team 1</string>
+    <string name="color_for_team_2">Color for Team 2</string>
+    <string name="choose_the_sound">Choose the sound</string>
+    <string name="mute">Mute</string>
+    <string name="pick_a_color_for">Pick a color for</string>
+    <string name="tts_default_phrase">%1$d to %2$s. For, %3$d to %4$s</string>
 </resources>

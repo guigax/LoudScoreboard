@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Loud Scoreboard</string>
+    <string name="team1DefaultName">Equipo 1</string>
+    <string name="team2DefaultName">Equipo 2</string>
+    <string name="reset_the_score">Reiniciar la puntuación</string>
+    <string name="announce_the_score">Anunciar la puntuación</string>
+    <string name="swap_the_scores_of_the_teams">Cambiar las puntuaciones de los equipos</string>
+    <string name="blow_a_whistle">Silbar</string>
+    <string name="settings">Configuración</string>
+    <string name="enter_name_for_team_1">Escribe el nombre del Equipo 1</string>
+    <string name="enter_name_for_team_2">Escribe el nombre del Equipo 2</string>
+    <string name="color_for_team_1">Color para el Equipo 1</string>
+    <string name="color_for_team_2">Color para el Equipo 2</string>
+    <string name="choose_the_sound">Selecciona el sonido</string>
+    <string name="mute">Silenciar</string>
+    <string name="pick_a_color_for">Elige un color para</string>
+    <string name="tts_default_phrase">%1$d al %2$s. A, %3$d al %4$s</string>
+</resources>
