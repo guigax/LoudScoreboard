@@ -4,6 +4,9 @@ This app was born from the necessity of a scoreboard app that announced the scor
 text-to-speech function, the ones that I have found with similar function did not get the focus for
 the audio (like when there is music playing).
 
+One thing that also distinguish it from other apps is that it shows on the lock screen, so if you
+want to pass your cellphone to another person to mark down the score, you can lock your phone.
+
 ## Features
 
 - [x] Show score
@@ -13,22 +16,27 @@ the audio (like when there is music playing).
 - [x] Whistle button
 - [x] Points announcement
 - [x] Teams announcement
-- [x] Settings screen (WIP)
+- [x] Change background colors
+- [x] Settings screen
 
 ## TODO
 
-- [ ] Improve changing the name of the teams
-- [ ] Change background colors
-- [ ] Change announce order
+- [ ] Option to disable vibrations
+- [ ] More colors
+- [ ] TTS pitch slider
+- [ ] Timer
+- [ ] Floating window
 - [ ] Change points increment number
 - [ ] Change app logo
-- [ ] Add option to mute the app
 - [ ] Add other sounds to replace the whistle
 - [ ] Add points limiter
+- [ ] Change announce order
+- [ ] Externalize the strings
 - [ ] Translation
 
 ## Credits
 
 - DataStore logic from [delasign](https://www.delasign.com/blog/android-studio-kotlin-data-store/)
+- Icons from [Google Fonts](https://fonts.google.com/icons)
 
 Feel free to contribute by opening issues, PRs or forking!

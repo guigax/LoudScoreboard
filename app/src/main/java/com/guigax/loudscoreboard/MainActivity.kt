@@ -12,19 +12,26 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.guigax.loudscoreboard.datacoordinator.DataCoordinator
+import com.guigax.loudscoreboard.datacoordinator.getIsMuted
+import com.guigax.loudscoreboard.datacoordinator.getTeam1ColorDataStore
 import com.guigax.loudscoreboard.datacoordinator.getTeam1NameDataStore
 import com.guigax.loudscoreboard.datacoordinator.getTeam1ScoreDataStore
+import com.guigax.loudscoreboard.datacoordinator.getTeam2ColorDataStore
 import com.guigax.loudscoreboard.datacoordinator.getTeam2NameDataStore
 import com.guigax.loudscoreboard.datacoordinator.getTeam2ScoreDataStore
 import com.guigax.loudscoreboard.datacoordinator.setTeam1NameDataStore
 import com.guigax.loudscoreboard.datacoordinator.setTeam2NameDataStore
+import com.guigax.loudscoreboard.datacoordinator.updateTeam1Name
 import com.guigax.loudscoreboard.datacoordinator.updateTeam1Score
+import com.guigax.loudscoreboard.datacoordinator.updateTeam2Name
 import com.guigax.loudscoreboard.datacoordinator.updateTeam2Score
-import com.guigax.loudscoreboard.fragment.BottomSheetDialogFragment
+import com.guigax.loudscoreboard.fragments.SettingsFragment
 import kotlinx.coroutines.runBlocking
 import java.time.Duration
 import java.util.LinkedList
@@ -37,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         val DURATION_NOW: Duration = Duration.ZERO
     }
 
+    private lateinit var team1Layout: LinearLayout
+    private lateinit var team2Layout: LinearLayout
     private lateinit var team1ScoreV: TextView
     private lateinit var team2ScoreV: TextView
     private lateinit var team1NameV: TextView
@@ -55,16 +64,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var vibrator: Vibrator
 
-    private var team1CurrentScore = 0
-    private var team2CurrentScore = 0
     private var team1CurrentName = ""
     private var team2CurrentName = ""
+    private var team1CurrentScore = 0
+    private var team2CurrentScore = 0
+    private var team1CurrentColor = android.R.color.holo_blue_light
+    private var team2CurrentColor = android.R.color.holo_purple
+    private var isMuted = false
 
     private var ttsQueue: LinkedList<String> = LinkedList<String>()
     private val handler = Handler()
     private var runnable: Runnable? = null
-
-
 
     private val focusRequest = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
         .setAudioAttributes(
@@ -101,9 +111,13 @@ class MainActivity : AppCompatActivity() {
 
         runBlocking {
             getNamesFromData()
+            getColorsFromData()
+            getIsMutedFromData()
         }
 
         updateTeamsNames()
+        updateTeamsScore()
+        updateTeamsColors()
     }
 
     override fun onPause() {
@@ -122,6 +136,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        team1Layout = findViewById(R.id.team1Layout)
+        team2Layout = findViewById(R.id.team2Layout)
         team1ScoreV = findViewById(R.id.team1Score)
         team2ScoreV = findViewById(R.id.team2Score)
         team1NameV = findViewById(R.id.team1Name)
@@ -136,7 +152,9 @@ class MainActivity : AppCompatActivity() {
         whistleV = findViewById(R.id.whistle)
         settingsV = findViewById(R.id.settings)
 
-        updateScores(speak = false)
+        updateTeamsScore()
+        updateTeamsNames()
+        updateTeamsColors()
     }
 
     private fun setListeners() {
@@ -186,14 +204,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun playSound() {
         val result = audioManager.requestAudioFocus(focusRequest)
-        // Check if the MediaPlayer is playing, stop and reset it
         if (mediaPlayer.isPlaying) {
             mediaPlayer.stop()
             if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
                 mediaPlayer.reset()
             }
         }
-        // Start playing the sound
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
             mediaPlayer.start()
         }
@@ -209,24 +225,48 @@ class MainActivity : AppCompatActivity() {
         team2CurrentScore = DataCoordinator.shared.getTeam2ScoreDataStore()
     }
 
+    private suspend fun getColorsFromData() {
+        team1CurrentColor = DataCoordinator.shared.getTeam1ColorDataStore()
+        team2CurrentColor = DataCoordinator.shared.getTeam2ColorDataStore()
+    }
+
+    private suspend fun getIsMutedFromData() {
+        isMuted = DataCoordinator.shared.getIsMuted()
+    }
+
     private fun updateScores(
-        speak: Boolean = true,
         delay: Duration = DEFAULT_DURATION_INCREASE_SCORE
     ) {
         DataCoordinator.shared.updateTeam1Score(team1CurrentScore)
         DataCoordinator.shared.updateTeam2Score(team2CurrentScore)
 
-        team1ScoreV.text = team1CurrentScore.toString()
-        team2ScoreV.text = team2CurrentScore.toString()
-
-        if (speak) {
-            announceScore(delay)
-        }
+        updateTeamsScore()
+        announceScore(delay)
     }
 
     private fun updateTeamsNames() {
         team1NameV.text = team1CurrentName
         team2NameV.text = team2CurrentName
+    }
+
+    private fun updateTeamsScore() {
+        team1ScoreV.text = team1CurrentScore.toString()
+        team2ScoreV.text = team2CurrentScore.toString()
+    }
+
+    private fun updateTeamsColors() {
+        team1Layout.setBackgroundTintList(
+            ContextCompat.getColorStateList(
+                baseContext,
+                team1CurrentColor
+            )
+        )
+        team2Layout.setBackgroundTintList(
+            ContextCompat.getColorStateList(
+                baseContext,
+                team2CurrentColor
+            )
+        )
     }
 
     private fun incrementTeamScore(teamNumber: Int) {
@@ -254,12 +294,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun swapTeamsNames() {
-        runBlocking {
-            DataCoordinator.shared.setTeam1NameDataStore(team2NameV.text.toString())
-            DataCoordinator.shared.setTeam2NameDataStore(team1NameV.text.toString())
-            getNamesFromData()
-        }
+        team1CurrentName = team2NameV.text.toString()
+        team2CurrentName = team1NameV.text.toString()
+
+        DataCoordinator.shared.updateTeam1Name(team2NameV.text.toString())
+        DataCoordinator.shared.updateTeam2Name(team1NameV.text.toString())
+
         updateTeamsNames()
+        updateTeamsColors()
     }
 
     private fun resetScore() {
@@ -269,6 +311,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun announceScore(delay: Duration = DEFAULT_DURATION_INCREASE_SCORE) {
+        if (isMuted && delay != DURATION_NOW) {
+            return
+        }
+
         ttsQueue.clear()
         ttsQueue.add("$team1CurrentScore para ${team1NameV.text}. A, $team2CurrentScore para ${team2NameV.text}")
         cancelPendingTTS()
@@ -276,8 +322,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showSettingsDialog() {
-        val bottomSheetDialogFragment = BottomSheetDialogFragment()
-        bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
+        val settingsFragment = SettingsFragment()
+        settingsFragment.show(supportFragmentManager, settingsFragment.tag)
     }
 
     private fun resetTeamsNames() {
@@ -291,11 +337,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupCoordinators() {
         DataCoordinator.shared.initialize(
-            context = baseContext,
+            context = this,
             onLoad = {
                 runBlocking {
                     getScoreFromData()
                     getNamesFromData()
+                    getColorsFromData()
+                    getIsMutedFromData()
                 }
             }
         )
