@@ -9,7 +9,7 @@ want to pass your cellphone to another person to mark down the score, you can lo
 
 ![Title Screen](images/main_vertical.png)
 
-![Title Screen Horizontal](images/main_vertical.png)
+![Title Screen Horizontal](images/main_horizontal.png)
 
 ![Settings](images/settings.png)
 
