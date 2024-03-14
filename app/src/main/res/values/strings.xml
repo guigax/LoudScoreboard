@@ -15,4 +15,9 @@
     <string name="mute">Mute</string>
     <string name="pick_a_color_for">Pick a color for</string>
     <string name="tts_default_phrase">%1$d to %2$s. For, %3$d to %4$s</string>
+    <string name="color_light_blue">Light Blue</string>
+    <string name="color_purple">Purple</string>
+    <string name="color_light_green">Light Green</string>
+    <string name="color_light_orange">Light Orange</string>
+    <string name="color_light_red">Light Red</string>
 </resources>

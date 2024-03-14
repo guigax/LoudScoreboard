@@ -16,4 +16,9 @@
     <string name="mute">Silenciar</string>
     <string name="pick_a_color_for">Elige un color para</string>
     <string name="tts_default_phrase">%1$d al %2$s. A, %3$d al %4$s</string>
+    <string name="color_light_blue">Celeste</string>
+    <string name="color_purple">Violeta</string>
+    <string name="color_light_green">Verde Claro</string>
+    <string name="color_light_orange">Naranja Claro</string>
+    <string name="color_light_red">Rojo Claro</string>
 </resources>

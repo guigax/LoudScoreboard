@@ -7,6 +7,14 @@ the audio (like when there is music playing).
 One thing that also distinguish it from other apps is that it shows on the lock screen, so if you
 want to pass your cellphone to another person to mark down the score, you can lock your phone.
 
+![Title Screen](images/main_vertical.png)
+
+![Title Screen Horizontal](images/main_vertical.png)
+
+![Settings](images/settings.png)
+
+![Color Picker](images/color_picker.png)
+
 ## Features
 
 - [x] Show score
@@ -18,6 +26,7 @@ want to pass your cellphone to another person to mark down the score, you can lo
 - [x] Teams announcement
 - [x] Change background colors
 - [x] Settings screen
+- [x] Translations in EN (default), PT and ES
 
 ## TODO
 
@@ -25,14 +34,12 @@ want to pass your cellphone to another person to mark down the score, you can lo
 - [ ] More colors
 - [ ] TTS pitch slider
 - [ ] Timer
-- [ ] Floating window
+- [ ] Picture-in-Picture
 - [ ] Change points increment number
 - [ ] Change app logo
 - [ ] Add other sounds to replace the whistle
 - [ ] Add points limiter
 - [ ] Change announce order
-- [ ] Externalize the strings
-- [ ] Translation
 
 ## Credits
 
