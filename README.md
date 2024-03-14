@@ -7,14 +7,6 @@ the audio (like when there is music playing).
 One thing that also distinguish it from other apps is that it shows on the lock screen, so if you
 want to pass your cellphone to another person to mark down the score, you can lock your phone.
 
-![Title Screen](images/main_vertical.png)
-
-![Title Screen Horizontal](images/main_horizontal.png)
-
-![Settings](images/settings.png)
-
-![Color Picker](images/color_picker.png)
-
 ## Features
 
 - [x] Show score
@@ -40,6 +32,20 @@ want to pass your cellphone to another person to mark down the score, you can lo
 - [ ] Add other sounds to replace the whistle
 - [ ] Add points limiter
 - [ ] Change announce order
+
+## Previews
+
+### Scoreboard Screen
+<img src="images/main_vertical.png" height="300" alt="Scoreboard Screen">
+
+### Scoreboard Screen Horizontal
+<img src="images/main_horizontal.png" width="300" alt="Scoreboard Screen Horizontal">
+
+### Settings Bottomsheet
+<img src="images/settings.png" height="300" alt="Settings Bottomsheet">
+
+### Color Picker Dialog
+<img src="images/color_picker.png" height="300" alt="Color Picker Dialog">
 
 ## Credits
 
