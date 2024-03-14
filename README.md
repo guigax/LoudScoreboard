@@ -18,6 +18,7 @@ want to pass your cellphone to another person to mark down the score, you can lo
 - [x] Teams announcement
 - [x] Change background colors
 - [x] Settings screen
+- [x] Translations in EN (default), PT and ES
 
 ## TODO
 
@@ -25,14 +26,26 @@ want to pass your cellphone to another person to mark down the score, you can lo
 - [ ] More colors
 - [ ] TTS pitch slider
 - [ ] Timer
-- [ ] Floating window
+- [ ] Picture-in-Picture
 - [ ] Change points increment number
 - [ ] Change app logo
 - [ ] Add other sounds to replace the whistle
 - [ ] Add points limiter
 - [ ] Change announce order
-- [ ] Externalize the strings
-- [ ] Translation
+
+## Previews
+
+### Scoreboard Screen
+<img src="images/main_vertical.png" height="300" alt="Scoreboard Screen">
+
+### Scoreboard Screen Horizontal
+<img src="images/main_horizontal.png" width="300" alt="Scoreboard Screen Horizontal">
+
+### Settings Bottomsheet
+<img src="images/settings.png" height="300" alt="Settings Bottomsheet">
+
+### Color Picker Dialog
+<img src="images/color_picker.png" height="300" alt="Color Picker Dialog">
 
 ## Credits
 

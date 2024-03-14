@@ -50,13 +50,13 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/reset"
                 android:layout_weight="1"
-                android:contentDescription="Reset the score" />
+                android:contentDescription="@string/reset_the_score" />
             <ImageView
                 android:id="@+id/announceScore"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="Announce the score"
+                android:contentDescription="@string/announce_the_score"
                 android:src="@drawable/score" />
             <ImageView
                 android:id="@+id/swapScore"
@@ -64,7 +64,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/swap"
                 android:layout_weight="1"
-                android:contentDescription="Swap the scores of the teams" />
+                android:contentDescription="@string/swap_the_scores_of_the_teams" />
             <TextView
                 android:id="@+id/team1MinusScore"
                 android:layout_width="wrap_content"
@@ -134,14 +134,14 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/whistle"
                 android:layout_weight="1"
-                android:contentDescription="Sound a whistle" />
+                android:contentDescription="@string/blow_a_whistle" />
             <ImageView
                 android:id="@+id/settings"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/settings"
                 android:layout_weight="1"
-                android:contentDescription="Settings" />
+                android:contentDescription="@string/settings" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

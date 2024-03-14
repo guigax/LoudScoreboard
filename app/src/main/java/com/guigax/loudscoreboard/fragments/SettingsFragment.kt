@@ -171,8 +171,12 @@ class SettingsFragment : BottomSheetDialogFragment() {
         dialog.teamNumber = teamNumber
         dialog.clearOptions()
 
+        val colorNames = context?.let {
+            ColorOptions.colorFromContext(it)
+        }
+
         for (i in icons.indices) {
-            dialog.addOption(icons[i], ColorOptions.names[i])
+            dialog.addOption(icons[i], colorNames?.get(i) ?: "")
         }
         val alertDialog = dialog.create()
         alertDialog.setOnDismissListener {
