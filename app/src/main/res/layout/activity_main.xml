@@ -41,6 +41,7 @@
             tools:ignore="HardcodedText" />
 
         <LinearLayout
+            android:id="@+id/team1ButtonsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
@@ -114,6 +115,7 @@
             tools:ignore="HardcodedText" />
 
         <LinearLayout
+            android:id="@+id/team2ButtonsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
@@ -135,6 +137,14 @@
                 android:src="@drawable/whistle"
                 android:layout_weight="1"
                 android:contentDescription="@string/blow_a_whistle" />
+
+            <ImageView
+                android:id="@+id/highlight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/highlight"
+                android:src="@drawable/highlight" />
             <ImageView
                 android:id="@+id/settings"
                 android:layout_width="wrap_content"

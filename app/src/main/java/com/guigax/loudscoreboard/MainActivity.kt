@@ -1,12 +1,14 @@
 package com.guigax.loudscoreboard
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -41,6 +43,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var team1Layout: LinearLayout
     private lateinit var team2Layout: LinearLayout
+    private lateinit var team1ButtonsLayout: LinearLayout
+    private lateinit var team2ButtonsLayout: LinearLayout
     private lateinit var team1ScoreV: TextView
     private lateinit var team2ScoreV: TextView
     private lateinit var team1NameV: TextView
@@ -51,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var announceV: ImageView
     private lateinit var swapV: ImageView
     private lateinit var whistleV: ImageView
+    private lateinit var highlightV: ImageView
     private lateinit var settingsV: ImageView
 
     private lateinit var audioManager: AudioManager
@@ -136,6 +141,8 @@ class MainActivity : AppCompatActivity() {
         team2Layout = findViewById(R.id.team2Layout)
         team1ScoreV = findViewById(R.id.team1Score)
         team2ScoreV = findViewById(R.id.team2Score)
+        team1ButtonsLayout = findViewById(R.id.team1ButtonsLayout)
+        team2ButtonsLayout = findViewById(R.id.team2ButtonsLayout)
         team1NameV = findViewById(R.id.team1Name)
         team2NameV = findViewById(R.id.team2Name)
         team1MinusV = findViewById(R.id.team1MinusScore)
@@ -146,6 +153,7 @@ class MainActivity : AppCompatActivity() {
         swapV = findViewById(R.id.swapScore)
         resetV = findViewById(R.id.resetScore)
         whistleV = findViewById(R.id.whistle)
+        highlightV = findViewById(R.id.highlight)
         settingsV = findViewById(R.id.settings)
 
         updateTeamsScore()
@@ -160,9 +168,8 @@ class MainActivity : AppCompatActivity() {
         team2MinusV.setOnClickListener { decreaseTeamScore(2) }
 
         mediaPlayer.setOnCompletionListener { audioManager.abandonAudioFocusRequest(focusRequest) }
-        whistleV.setOnClickListener {
-            playSound()
-        }
+        whistleV.setOnClickListener { playSound() }
+        highlightV.setOnClickListener { highConstrast() }
         resetV.setOnClickListener { resetScore() }
         resetV.setOnLongClickListener {
             resetTeamsNames()
@@ -337,6 +344,56 @@ class MainActivity : AppCompatActivity() {
             getNamesFromData()
         }
         updateTeamsNames()
+    }
+
+    private fun highConstrast() {
+        team1Layout.setBackgroundTintList(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.black
+            )
+        )
+
+        team1ButtonsLayout.visibility = View.GONE
+        team1ScoreV.textSize = 300f
+        team1NameV.setTextColor(ContextCompat.getColorStateList(baseContext, R.color.green_screen))
+        team1ScoreV.setTextColor(ContextCompat.getColorStateList(baseContext, R.color.green_screen))
+        resetV.setColorFilter(getColor(R.color.green_screen), PorterDuff.Mode.SRC_IN)
+        announceV.setColorFilter(getColor(R.color.green_screen), PorterDuff.Mode.SRC_IN)
+        swapV.setColorFilter(getColor(R.color.green_screen), PorterDuff.Mode.SRC_IN)
+        team1MinusV.setTextColor(ContextCompat.getColorStateList(baseContext, R.color.green_screen))
+
+        team2Layout.setBackgroundTintList(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.black
+            )
+        )
+
+        team2ButtonsLayout.visibility = View.GONE
+        team2ScoreV.textSize = 300f
+        team2NameV.setTextColor(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.princess_peach
+            )
+        )
+        team2ScoreV.setTextColor(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.princess_peach
+            )
+        )
+        team2MinusV.setTextColor(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.princess_peach
+            )
+        )
+        whistleV.setColorFilter(getColor(R.color.princess_peach), PorterDuff.Mode.SRC_IN)
+        highlightV.setColorFilter(getColor(R.color.princess_peach), PorterDuff.Mode.SRC_IN)
+        settingsV.setColorFilter(getColor(R.color.princess_peach), PorterDuff.Mode.SRC_IN)
+
     }
 
     private fun setupCoordinators() {

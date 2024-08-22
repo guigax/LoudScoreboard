@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green_screen">#FF1BEB00</color>
+    <color name="princess_peach">#FFFD75FF</color>
 </resources>

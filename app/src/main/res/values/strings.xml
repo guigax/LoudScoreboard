@@ -20,4 +20,5 @@
     <string name="color_light_green">Light Green</string>
     <string name="color_light_orange">Light Orange</string>
     <string name="color_light_red">Light Red</string>
+    <string name="highlight">Enable high contrast mode</string>
 </resources>
