@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         val DEFAULT_DURATION_INCREASE_SCORE: Duration = Duration.ofMillis(1000)
         val DEFAULT_DURATION_DECREASE_SCORE: Duration = Duration.ofMillis(4000)
         val DURATION_NOW: Duration = Duration.ZERO
+        val DURATION_DISABLED_WHISTLE: Duration = Duration.ofMillis(3000)
     }
 
     private lateinit var team1Layout: LinearLayout
@@ -207,6 +208,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun playSound() {
         val result = audioManager.requestAudioFocus(focusRequest)
+        whistleV.isEnabled = false
         if (mediaPlayer.isPlaying) {
             mediaPlayer.stop()
             if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
@@ -216,6 +218,9 @@ class MainActivity : AppCompatActivity() {
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
             mediaPlayer.start()
         }
+        Handler(Looper.getMainLooper()).postDelayed({
+            whistleV.isEnabled = true
+        }, DURATION_DISABLED_WHISTLE.toMillis())
     }
 
     private suspend fun getNamesFromData() {
