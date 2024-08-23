@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         val DEFAULT_DURATION_DECREASE_SCORE: Duration = Duration.ofMillis(4000)
         val DURATION_NOW: Duration = Duration.ZERO
         val DURATION_DISABLED_WHISTLE: Duration = Duration.ofMillis(3000)
+        val DURATION_HIGHLIGHT: Duration = Duration.ofMillis(5000)
     }
 
     private lateinit var team1Layout: LinearLayout
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
     private var team1CurrentColor = android.R.color.holo_blue_light
     private var team2CurrentColor = android.R.color.holo_purple
     private var isMuted = false
+    private var currentTTSDelay = DEFAULT_DURATION_INCREASE_SCORE
 
     private var ttsQueue: LinkedList<String> = LinkedList<String>()
     private val handler = Handler()
@@ -178,7 +180,10 @@ class MainActivity : AppCompatActivity() {
             //vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
             return@setOnLongClickListener true
         }
-        announceV.setOnClickListener { announceScore(DURATION_NOW) }
+        announceV.setOnClickListener {
+            currentTTSDelay = DURATION_NOW
+            announceScore()
+        }
         swapV.setOnClickListener { swapScores() }
         swapV.setOnLongClickListener {
             swapTeamsNames()
@@ -189,14 +194,14 @@ class MainActivity : AppCompatActivity() {
         settingsV.setOnClickListener { showSettingsDialog() }
     }
 
-    private fun scheduleTTS(delay: Duration = DEFAULT_DURATION_INCREASE_SCORE) {
+    private fun scheduleTTS() {
         runnable = Runnable {
             if (ttsQueue.isNotEmpty()) {
                 TTS(this@MainActivity, ttsQueue.last, audioManager)
             }
             ttsQueue.clear()
         }
-        handler.postDelayed(runnable!!, delay.toMillis())
+        handler.postDelayed(runnable!!, currentTTSDelay.toMillis())
     }
 
     private fun cancelPendingTTS() {
@@ -242,14 +247,12 @@ class MainActivity : AppCompatActivity() {
         isMuted = DataCoordinator.shared.getIsMuted()
     }
 
-    private fun updateScores(
-        delay: Duration = DEFAULT_DURATION_INCREASE_SCORE
-    ) {
+    private fun updateScores() {
         DataCoordinator.shared.updateTeam1Score(team1CurrentScore)
         DataCoordinator.shared.updateTeam2Score(team2CurrentScore)
 
         updateTeamsScore()
-        announceScore(delay)
+        announceScore()
     }
 
     private fun updateTeamsNames() {
@@ -290,7 +293,8 @@ class MainActivity : AppCompatActivity() {
             1 -> if (team1CurrentScore > 0) team1CurrentScore--
             2 -> if (team2CurrentScore > 0) team2CurrentScore--
         }
-        updateScores(delay = DEFAULT_DURATION_DECREASE_SCORE)
+        currentTTSDelay = DEFAULT_DURATION_DECREASE_SCORE
+        updateScores()
     }
 
     private fun swapScores() {
@@ -318,8 +322,8 @@ class MainActivity : AppCompatActivity() {
         updateScores()
     }
 
-    private fun announceScore(delay: Duration = DEFAULT_DURATION_INCREASE_SCORE) {
-        if (isMuted && delay != DURATION_NOW) {
+    private fun announceScore() {
+        if (isMuted && currentTTSDelay != DURATION_NOW) {
             return
         }
 
@@ -334,7 +338,7 @@ class MainActivity : AppCompatActivity() {
         ttsQueue.clear()
         ttsQueue.add(ttsPhrase)
         cancelPendingTTS()
-        scheduleTTS(delay)
+        scheduleTTS()
     }
 
     private fun showSettingsDialog() {
@@ -405,7 +409,7 @@ class MainActivity : AppCompatActivity() {
         // Revert state
         Handler(Looper.getMainLooper()).postDelayed({
             revertHighlight()
-        }, 5000)
+        }, DURATION_HIGHLIGHT.toMillis())
     }
 
     private fun revertHighlight() {
