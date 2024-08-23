@@ -148,5 +148,43 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/mute" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/tts_speed_rate"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/ttsSpeedRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:value="1.5"
+                android:valueFrom="0.1"
+                android:valueTo="3.0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/tts_pitch"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/ttsPitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:value="0.8"
+                android:valueFrom="0.1"
+                android:valueTo="3.0" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

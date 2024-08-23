@@ -73,3 +73,23 @@ fun DataCoordinator.updateIsMuted(value: Boolean) {
         setIsMuted(value)
     }
 }
+
+fun DataCoordinator.updateTTSSpeedRate(value: Float) {
+    // Update Value
+    this.ttsSpeedRateVariable = value
+    // Save to System
+    GlobalScope.launch(Dispatchers.Default) {
+        // Update DataStore
+        setTTSSpeedRateDataStore(value)
+    }
+}
+
+fun DataCoordinator.updateTTSPitch(value: Float) {
+    // Update Value
+    this.ttsPitchVariable = value
+    // Save to System
+    GlobalScope.launch(Dispatchers.Default) {
+        // Update DataStore
+        setTTSPitchDataStore(value)
+    }
+}

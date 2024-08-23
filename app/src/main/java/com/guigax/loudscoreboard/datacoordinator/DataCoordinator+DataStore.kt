@@ -94,3 +94,29 @@ suspend fun DataCoordinator.setIsMuted(value: Boolean) {
         preferences[PreferencesKeys.isMuted] = value
     }
 }
+
+suspend fun DataCoordinator.getTTSSpeedRate(): Float {
+    val context = this.context ?: return defaultTTSSpeedRate
+    return context.dataStore.data.firstOrNull()?.get(PreferencesKeys.ttsSpeedRate)
+        ?: defaultTTSSpeedRate
+}
+
+suspend fun DataCoordinator.setTTSSpeedRateDataStore(value: Float) {
+    val context = this.context ?: return
+    context.dataStore.edit { preferences ->
+        preferences[PreferencesKeys.ttsSpeedRate] = value
+    }
+}
+
+suspend fun DataCoordinator.getTTSPitch(): Float {
+    val context = this.context ?: return defaultTTSPitch
+    return context.dataStore.data.firstOrNull()?.get(PreferencesKeys.ttsPitch)
+        ?: defaultTTSPitch
+}
+
+suspend fun DataCoordinator.setTTSPitchDataStore(value: Float) {
+    val context = this.context ?: return
+    context.dataStore.edit { preferences ->
+        preferences[PreferencesKeys.ttsPitch] = value
+    }
+}

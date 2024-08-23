@@ -33,6 +33,11 @@ class DataCoordinator {
     var isMutedPreferenceVariable: Boolean = false
     val defaultIsMutedPreferenceVariable: Boolean = false
 
+    var ttsSpeedRateVariable: Float = 0f
+    var defaultTTSSpeedRate: Float = 1.5f
+    var ttsPitchVariable: Float = 0f
+    var defaultTTSPitch: Float = 0.8f
+
     val Context.dataStore by preferencesDataStore(
         name = USER_PREFERENCES_NAME
     )
@@ -54,6 +59,9 @@ class DataCoordinator {
             team2ColorPreferenceVariable = getTeam2ColorDataStore()
 
             isMutedPreferenceVariable = getIsMuted()
+
+            ttsSpeedRateVariable = getTTSSpeedRate()
+            ttsPitchVariable = getTTSPitch()
             // Callback
             onLoad()
         }

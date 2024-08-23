@@ -22,4 +22,6 @@
     <string name="color_light_orange">Laranja Claro</string>
     <string name="color_light_red">Vermelho Claro</string>
     <string name="highlight">Habilitar modo de alto contraste</string>
+    <string name="tts_pitch">Tom</string>
+    <string name="tts_speed_rate">Velocidade de fala</string>
 </resources>

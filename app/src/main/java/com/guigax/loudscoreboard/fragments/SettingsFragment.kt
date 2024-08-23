@@ -16,14 +16,19 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.slider.Slider
 import com.guigax.loudscoreboard.R
 import com.guigax.loudscoreboard.datacoordinator.DataCoordinator
 import com.guigax.loudscoreboard.datacoordinator.getIsMuted
+import com.guigax.loudscoreboard.datacoordinator.getTTSPitch
+import com.guigax.loudscoreboard.datacoordinator.getTTSSpeedRate
 import com.guigax.loudscoreboard.datacoordinator.getTeam1ColorDataStore
 import com.guigax.loudscoreboard.datacoordinator.getTeam1NameDataStore
 import com.guigax.loudscoreboard.datacoordinator.getTeam2ColorDataStore
 import com.guigax.loudscoreboard.datacoordinator.getTeam2NameDataStore
 import com.guigax.loudscoreboard.datacoordinator.updateIsMuted
+import com.guigax.loudscoreboard.datacoordinator.updateTTSPitch
+import com.guigax.loudscoreboard.datacoordinator.updateTTSSpeedRate
 import com.guigax.loudscoreboard.datacoordinator.updateTeam1Name
 import com.guigax.loudscoreboard.datacoordinator.updateTeam2Name
 import com.guigax.loudscoreboard.dialogs.ColorPickerDialog
@@ -37,6 +42,8 @@ class SettingsFragment : BottomSheetDialogFragment() {
     private lateinit var team2NameV: EditText
     private lateinit var dialog: ColorPickerDialog
     private lateinit var mute: CheckBox
+    private lateinit var ttsSpeedRateSlider: Slider
+    private lateinit var ttsPitchSlider: Slider
 
     private var team1CurrentName = ""
     private var team2CurrentName = ""
@@ -45,6 +52,10 @@ class SettingsFragment : BottomSheetDialogFragment() {
     private var team2CurrentColor = android.R.color.holo_orange_light
 
     private var isMuted = false
+
+    private var currentTTSSpeedRate = 0.0f
+    private var currentTTSPitch = 0.0f
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,9 +74,21 @@ class SettingsFragment : BottomSheetDialogFragment() {
         team2NameV = fragmentView.findViewById(R.id.team2Name)
         mute = fragmentView.findViewById(R.id.mute)
 
+        ttsSpeedRateSlider = fragmentView.findViewById(R.id.ttsSpeedRate)
+        ttsPitchSlider = fragmentView.findViewById(R.id.ttsPitch)
+
         dialog = context?.let { ColorPickerDialog(it) }!!
 
-        setupCoordinators()
+        runBlocking {
+            getNamesFromData()
+            getColorFromData()
+            getIsMutedFromData()
+            getTTSSlidersFromData()
+        }
+        updateTeamsNames()
+        updateTeamsColors()
+        updateIsMuted()
+        updateTTSSliders()
 
         team1ColorV.setOnClickListener {
             showColorDialog(1)
@@ -87,24 +110,7 @@ class SettingsFragment : BottomSheetDialogFragment() {
 
         runBlocking {
             setNames()
-        }
-    }
-
-    private fun setupCoordinators() {
-        context?.let {
-            DataCoordinator.shared.initialize(
-                context = it,
-                onLoad = {
-                    runBlocking {
-                        getNamesFromData()
-                        getColorFromData()
-                        getIsMutedFromData()
-                    }
-                    updateTeamsNames()
-                    updateTeamsColors()
-                    updateIsMuted()
-                }
-            )
+            setTTSSliders()
         }
     }
 
@@ -115,6 +121,11 @@ class SettingsFragment : BottomSheetDialogFragment() {
 
     private fun setIsMuted() {
         DataCoordinator.shared.updateIsMuted(mute.isChecked)
+    }
+
+    private fun setTTSSliders() {
+        DataCoordinator.shared.updateTTSSpeedRate(ttsSpeedRateSlider.value)
+        DataCoordinator.shared.updateTTSPitch(ttsPitchSlider.value)
     }
 
     private suspend fun getNamesFromData() {
@@ -129,6 +140,11 @@ class SettingsFragment : BottomSheetDialogFragment() {
 
     private suspend fun getIsMutedFromData() {
         isMuted = DataCoordinator.shared.getIsMuted()
+    }
+
+    private suspend fun getTTSSlidersFromData() {
+        currentTTSSpeedRate = DataCoordinator.shared.getTTSSpeedRate()
+        currentTTSPitch = DataCoordinator.shared.getTTSPitch()
     }
 
     private fun updateTeamsNames() {
@@ -155,6 +171,11 @@ class SettingsFragment : BottomSheetDialogFragment() {
 
     private fun updateIsMuted() {
         mute.isChecked = isMuted
+    }
+
+    private fun updateTTSSliders() {
+        ttsSpeedRateSlider.value = currentTTSSpeedRate
+        ttsPitchSlider.value = currentTTSPitch
     }
 
     // TODO: does it need two loops?
