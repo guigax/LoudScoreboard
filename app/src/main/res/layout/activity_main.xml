@@ -89,7 +89,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="@android:color/holo_purple">
+        android:background="@android:color/holo_orange_light">
 
         <!-- Team 2 Name -->
         <TextView

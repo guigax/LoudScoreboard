@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@android:color/holo_purple"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:text="@string/color_for_team_2"
             android:textColor="@color/black" />
 

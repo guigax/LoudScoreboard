@@ -42,7 +42,7 @@ class SettingsFragment : BottomSheetDialogFragment() {
     private var team2CurrentName = ""
 
     private var team1CurrentColor = android.R.color.holo_blue_light
-    private var team2CurrentColor = android.R.color.holo_purple
+    private var team2CurrentColor = android.R.color.holo_orange_light
 
     private var isMuted = false
     override fun onCreateView(

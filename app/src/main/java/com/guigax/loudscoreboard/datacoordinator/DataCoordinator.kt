@@ -28,7 +28,7 @@ class DataCoordinator {
     var team1ColorPreferenceVariable: Int = 0
     val defaultTeam1ColorPreferenceVariable: Int = android.R.color.holo_blue_light
     var team2ColorPreferenceVariable: Int = 0
-    val defaultTeam2ColorPreferenceVariable: Int = android.R.color.holo_purple
+    val defaultTeam2ColorPreferenceVariable: Int = android.R.color.holo_orange_light
 
     var isMutedPreferenceVariable: Boolean = false
     val defaultIsMutedPreferenceVariable: Boolean = false

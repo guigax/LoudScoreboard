@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     private var team1CurrentScore = 0
     private var team2CurrentScore = 0
     private var team1CurrentColor = android.R.color.holo_blue_light
-    private var team2CurrentColor = android.R.color.holo_purple
+    private var team2CurrentColor = android.R.color.holo_orange_light
     private var isMuted = false
     private var currentTTSDelay = DEFAULT_DURATION_INCREASE_SCORE
 
