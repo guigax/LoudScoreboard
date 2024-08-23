@@ -13,9 +13,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.slider.Slider
 import com.guigax.loudscoreboard.R
 import com.guigax.loudscoreboard.datacoordinator.DataCoordinator
@@ -36,11 +39,18 @@ import com.guigax.loudscoreboard.preferences.ColorOptions
 import kotlinx.coroutines.runBlocking
 
 class SettingsFragment : BottomSheetDialogFragment() {
+    private lateinit var toggleGroup: MaterialButtonToggleGroup
+    private lateinit var paletteLayout: LinearLayout
+    private lateinit var textToSpeechLayout: LinearLayout
+    private lateinit var paletteButton: MaterialButton
+    private lateinit var textToSpeechButton: MaterialButton
+
     private lateinit var team1ColorV: Button
     private lateinit var team2ColorV: Button
     private lateinit var team1NameV: EditText
     private lateinit var team2NameV: EditText
     private lateinit var dialog: ColorPickerDialog
+
     private lateinit var mute: CheckBox
     private lateinit var ttsSpeedRateSlider: Slider
     private lateinit var ttsPitchSlider: Slider
@@ -73,6 +83,11 @@ class SettingsFragment : BottomSheetDialogFragment() {
         team1NameV = fragmentView.findViewById(R.id.team1Name)
         team2NameV = fragmentView.findViewById(R.id.team2Name)
         mute = fragmentView.findViewById(R.id.mute)
+        toggleGroup = fragmentView.findViewById(R.id.toggleGroup)
+        paletteLayout = fragmentView.findViewById(R.id.paletteLayout)
+        textToSpeechLayout = fragmentView.findViewById(R.id.textToSpeechLayout)
+        paletteButton = fragmentView.findViewById(R.id.paletteButton)
+        textToSpeechButton = fragmentView.findViewById(R.id.textToSpeechButton)
 
         ttsSpeedRateSlider = fragmentView.findViewById(R.id.ttsSpeedRate)
         ttsPitchSlider = fragmentView.findViewById(R.id.ttsPitch)
@@ -89,6 +104,7 @@ class SettingsFragment : BottomSheetDialogFragment() {
         updateTeamsColors()
         updateIsMuted()
         updateTTSSliders()
+        updateToggleGroup()
 
         team1ColorV.setOnClickListener {
             showColorDialog(1)
@@ -98,6 +114,22 @@ class SettingsFragment : BottomSheetDialogFragment() {
         }
         mute.setOnClickListener {
             setIsMuted()
+        }
+
+        toggleGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+            when (checkedId) {
+                R.id.paletteButton -> {
+                    textToSpeechButton.isChecked = false
+                    paletteLayout.visibility = View.VISIBLE
+                    textToSpeechLayout.visibility = View.GONE
+                }
+
+                R.id.textToSpeechButton -> {
+                    paletteButton.isChecked = false
+                    paletteLayout.visibility = View.GONE
+                    textToSpeechLayout.visibility = View.VISIBLE
+                }
+            }
         }
 
         return fragmentView
@@ -112,6 +144,15 @@ class SettingsFragment : BottomSheetDialogFragment() {
             setNames()
             setTTSSliders()
         }
+    }
+
+    private fun updateToggleGroup() {
+        // Set the paletteButton as checked by default
+        toggleGroup.check(R.id.paletteButton)
+        paletteButton.isChecked = true
+        textToSpeechButton.isChecked = false
+        paletteLayout.visibility = View.VISIBLE
+        textToSpeechLayout.visibility = View.GONE
     }
 
     private fun setNames() {
@@ -225,6 +266,4 @@ class SettingsFragment : BottomSheetDialogFragment() {
 
         } as Drawable
     }
-
-
 }
