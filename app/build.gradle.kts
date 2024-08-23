@@ -11,8 +11,8 @@ android {
         applicationId = "com.guigax.loudscoreboard"
         minSdk = 29
         targetSdk = 34
-        versionCode = 7
-        versionName = "1.1.0"
+        versionCode = 9
+        versionName = "1.3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
