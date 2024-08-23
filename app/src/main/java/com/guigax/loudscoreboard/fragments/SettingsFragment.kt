@@ -234,7 +234,7 @@ class SettingsFragment : BottomSheetDialogFragment() {
         dialog.clearOptions()
 
         val colorNames = context?.let {
-            ColorOptions.colorFromContext(it)
+            ColorOptions.colorNamesFromContext(it)
         }
 
         for (i in icons.indices) {
