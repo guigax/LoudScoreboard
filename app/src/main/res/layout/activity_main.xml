@@ -26,7 +26,8 @@
             android:textStyle="bold"
             android:layout_weight="0.1"
             android:paddingTop="20dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:ignore="NestedWeights" />
 
         <!-- Team 1 Score -->
         <TextView
@@ -100,7 +101,8 @@
             android:textStyle="bold"
             android:layout_weight="0.1"
             android:paddingTop="20dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:ignore="NestedWeights" />
 
         <!-- Team 2 Score -->
         <TextView
@@ -130,13 +132,6 @@
                 android:textAlignment="center"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
-            <ImageView
-                android:id="@+id/whistle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/whistle"
-                android:layout_weight="1"
-                android:contentDescription="@string/blow_a_whistle" />
 
             <ImageView
                 android:id="@+id/highlight"
@@ -145,6 +140,13 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/highlight"
                 android:src="@drawable/highlight" />
+            <ImageView
+                android:id="@+id/whistle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/whistle"
+                android:layout_weight="1"
+                android:contentDescription="@string/blow_a_whistle" />
             <ImageView
                 android:id="@+id/settings"
                 android:layout_width="wrap_content"

@@ -23,7 +23,8 @@
             android:text="@string/team1DefaultName"
             android:textSize="24sp"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="NestedWeights" />
         <TextView
             android:id="@+id/team1Score"
             android:layout_width="wrap_content"
@@ -94,7 +95,8 @@
             android:text="@string/team2DefaultName"
             android:textSize="24sp"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="NestedWeights" />
         <TextView
             android:id="@+id/team2Score"
             android:layout_width="wrap_content"
@@ -123,20 +125,19 @@
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
             <ImageView
-                android:id="@+id/whistle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="@string/blow_a_whistle"
-                android:src="@drawable/whistle" />
-
-            <ImageView
                 android:id="@+id/highlight"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/highlight"
                 android:src="@drawable/highlight" />
+            <ImageView
+                android:id="@+id/whistle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/blow_a_whistle"
+                android:src="@drawable/whistle" />
             <ImageView
                 android:id="@+id/settings"
                 android:layout_width="wrap_content"

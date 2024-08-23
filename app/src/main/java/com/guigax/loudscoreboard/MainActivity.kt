@@ -1,13 +1,13 @@
 package com.guigax.loudscoreboard
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity() {
 
         mediaPlayer.setOnCompletionListener { audioManager.abandonAudioFocusRequest(focusRequest) }
         whistleV.setOnClickListener { playSound() }
-        highlightV.setOnClickListener { highConstrast() }
+        highlightV.setOnClickListener { highContrast() }
         resetV.setOnClickListener { resetScore() }
         resetV.setOnLongClickListener {
             resetTeamsNames()
@@ -346,22 +346,34 @@ class MainActivity : AppCompatActivity() {
         updateTeamsNames()
     }
 
-    private fun highConstrast() {
+    private fun highContrast() {
+        val highlightedWeight = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,  // Width
+            LinearLayout.LayoutParams.WRAP_CONTENT   // Height
+        )
+        highlightedWeight.weight = 0.9f
+
         team1Layout.setBackgroundTintList(
             ContextCompat.getColorStateList(
                 baseContext,
                 R.color.black
             )
         )
-
         team1ButtonsLayout.visibility = View.GONE
         team1ScoreV.textSize = 300f
-        team1NameV.setTextColor(ContextCompat.getColorStateList(baseContext, R.color.green_screen))
-        team1ScoreV.setTextColor(ContextCompat.getColorStateList(baseContext, R.color.green_screen))
-        resetV.setColorFilter(getColor(R.color.green_screen), PorterDuff.Mode.SRC_IN)
-        announceV.setColorFilter(getColor(R.color.green_screen), PorterDuff.Mode.SRC_IN)
-        swapV.setColorFilter(getColor(R.color.green_screen), PorterDuff.Mode.SRC_IN)
-        team1MinusV.setTextColor(ContextCompat.getColorStateList(baseContext, R.color.green_screen))
+        team1ScoreV.layoutParams = highlightedWeight
+        team1NameV.setTextColor(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.green_screen
+            )
+        )
+        team1ScoreV.setTextColor(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.green_screen
+            )
+        )
 
         team2Layout.setBackgroundTintList(
             ContextCompat.getColorStateList(
@@ -369,9 +381,9 @@ class MainActivity : AppCompatActivity() {
                 R.color.black
             )
         )
-
         team2ButtonsLayout.visibility = View.GONE
         team2ScoreV.textSize = 300f
+        team2ScoreV.layoutParams = highlightedWeight
         team2NameV.setTextColor(
             ContextCompat.getColorStateList(
                 baseContext,
@@ -384,16 +396,52 @@ class MainActivity : AppCompatActivity() {
                 R.color.princess_peach
             )
         )
-        team2MinusV.setTextColor(
+
+        // Revert state
+        Handler(Looper.getMainLooper()).postDelayed({
+            revertHighlight()
+        }, 5000)
+    }
+
+    private fun revertHighlight() {
+        val normalWeight = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,  // Width
+            LinearLayout.LayoutParams.WRAP_CONTENT   // Height
+        )
+        normalWeight.weight = 0.9f
+
+        updateTeamsColors()
+        team1ButtonsLayout.visibility = View.VISIBLE
+        team1ScoreV.textSize = 150f
+        team1ScoreV.layoutParams = normalWeight
+        team1NameV.setTextColor(
             ContextCompat.getColorStateList(
                 baseContext,
-                R.color.princess_peach
+                R.color.black
             )
         )
-        whistleV.setColorFilter(getColor(R.color.princess_peach), PorterDuff.Mode.SRC_IN)
-        highlightV.setColorFilter(getColor(R.color.princess_peach), PorterDuff.Mode.SRC_IN)
-        settingsV.setColorFilter(getColor(R.color.princess_peach), PorterDuff.Mode.SRC_IN)
+        team1ScoreV.setTextColor(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.black
+            )
+        )
 
+        team2ButtonsLayout.visibility = View.VISIBLE
+        team2ScoreV.textSize = 150f
+        team1ScoreV.layoutParams = normalWeight
+        team2NameV.setTextColor(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.black
+            )
+        )
+        team2ScoreV.setTextColor(
+            ContextCompat.getColorStateList(
+                baseContext,
+                R.color.black
+            )
+        )
     }
 
     private fun setupCoordinators() {
