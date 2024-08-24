@@ -44,17 +44,15 @@ want to pass your cellphone to another person to mark down the score, you can lo
 
 ### High Contrast mode
 
-<img src="images/high_contrast.png" width="300" alt="Scoreboard Screen High Contras">
+<img src="images/high_contrast.png" width="300" alt="Scoreboard Screen High Contrast">
 
 ### Settings Bottomsheet - Palette
-
 <img src="images/settings_palette.png" height="300" alt="Settings Bottomsheet - Palette">
 
 ### Color Picker Dialog
 <img src="images/color_picker.png" height="300" alt="Color Picker Dialog">
 
 ### Settings Bottomsheet - Text-to-speech
-
 <img src="images/settings_tts.png" height="300" alt="Settings Bottomsheet - Text-to-speech">
 
 ## Credits
