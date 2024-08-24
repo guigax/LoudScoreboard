@@ -43,7 +43,6 @@ want to pass your cellphone to another person to mark down the score, you can lo
 <img src="images/main_horizontal.png" width="300" alt="Scoreboard Screen Horizontal">
 
 ### High Contrast mode
-
 <img src="images/high_contrast.png" width="300" alt="Scoreboard Screen High Contrast">
 
 ### Settings Bottomsheet - Palette
