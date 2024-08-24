@@ -1,6 +1,7 @@
 package com.guigax.loudscoreboard.preferences
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 
@@ -14,4 +15,7 @@ object PreferencesKeys {
     val team2Color = intPreferencesKey("team2ColorPreferenceKey")
 
     val isMuted = booleanPreferencesKey("isMutedPreferenceKey")
+
+    val ttsSpeedRate = floatPreferencesKey("ttsSpeedRatePreferenceKey")
+    val ttsPitch = floatPreferencesKey("ttsPitchPreferenceKey")
 }

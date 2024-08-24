@@ -8,6 +8,7 @@ import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import android.widget.Toast
+import com.guigax.loudscoreboard.datacoordinator.DataCoordinator
 import java.util.Locale
 
 
@@ -34,8 +35,8 @@ class TTS(
         if (i == TextToSpeech.SUCCESS) {
             val result: Int = tts.setLanguage(Locale.getDefault())
 
-            tts.setSpeechRate(1.5f)
-            tts.setPitch(0.8f)
+            tts.setSpeechRate(DataCoordinator.shared.ttsSpeedRatePref)
+            tts.setPitch(DataCoordinator.shared.ttsPitchPref)
 
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(activity, "This Language is not supported", Toast.LENGTH_SHORT)

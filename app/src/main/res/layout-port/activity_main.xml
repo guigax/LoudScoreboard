@@ -23,7 +23,8 @@
             android:text="@string/team1DefaultName"
             android:textSize="24sp"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="NestedWeights" />
         <TextView
             android:id="@+id/team1Score"
             android:layout_width="wrap_content"
@@ -36,6 +37,7 @@
             tools:ignore="HardcodedText" />
 
         <LinearLayout
+            android:id="@+id/team1ButtonsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
@@ -81,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@android:color/holo_purple"
+        android:background="@android:color/holo_orange_light"
         android:gravity="center"
         android:orientation="vertical">
         <TextView
@@ -93,7 +95,8 @@
             android:text="@string/team2DefaultName"
             android:textSize="24sp"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="NestedWeights" />
         <TextView
             android:id="@+id/team2Score"
             android:layout_width="wrap_content"
@@ -106,6 +109,7 @@
             tools:ignore="HardcodedText" />
 
         <LinearLayout
+            android:id="@+id/team2ButtonsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
@@ -120,6 +124,13 @@
                 android:autoSizeTextType="uniform"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
+            <ImageView
+                android:id="@+id/highlight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/highlight"
+                android:src="@drawable/highlight" />
             <ImageView
                 android:id="@+id/whistle"
                 android:layout_width="wrap_content"

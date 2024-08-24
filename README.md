@@ -14,21 +14,22 @@ want to pass your cellphone to another person to mark down the score, you can lo
 - [x] Reset button
 - [x] Swap button
 - [x] Whistle button
+- [x] High contrast button
 - [x] Points announcement
 - [x] Teams announcement
+- [x] TTS speed rate and pitch sliders
 - [x] Change background colors
 - [x] Settings screen
 - [x] Translations in EN (default), PT and ES
 
 ## TODO
 
-- [ ] Option to disable vibrations
 - [ ] More colors
-- [ ] TTS pitch slider
-- [ ] Timer
+- [ ] TTS locale
+- [ ] Game timer
 - [ ] Picture-in-Picture
 - [ ] Change points increment number
-- [ ] Change app logo
+- [ ] Improve app logo
 - [ ] Add other sounds to replace the whistle
 - [ ] Add points limiter
 - [ ] Change announce order
@@ -41,11 +42,17 @@ want to pass your cellphone to another person to mark down the score, you can lo
 ### Scoreboard Screen Horizontal
 <img src="images/main_horizontal.png" width="300" alt="Scoreboard Screen Horizontal">
 
-### Settings Bottomsheet
-<img src="images/settings.png" height="300" alt="Settings Bottomsheet">
+### High Contrast mode
+<img src="images/high_contrast.png" height="300" alt="Scoreboard Screen High Contrast">
+
+### Settings Bottomsheet - Palette
+<img src="images/settings_palette.png" height="300" alt="Settings Bottomsheet - Palette">
 
 ### Color Picker Dialog
 <img src="images/color_picker.png" height="300" alt="Color Picker Dialog">
+
+### Settings Bottomsheet - Text-to-speech
+<img src="images/settings_tts.png" height="300" alt="Settings Bottomsheet - Text-to-speech">
 
 ## Credits
 

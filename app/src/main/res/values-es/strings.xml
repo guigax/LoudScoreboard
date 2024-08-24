@@ -21,4 +21,7 @@
     <string name="color_light_green">Verde Claro</string>
     <string name="color_light_orange">Naranja Claro</string>
     <string name="color_light_red">Rojo Claro</string>
+    <string name="highlight">Habilitar el modo de alto contraste</string>
+    <string name="tts_pitch">Tono</string>
+    <string name="tts_speed_rate">Velocidad de voz</string>
 </resources>

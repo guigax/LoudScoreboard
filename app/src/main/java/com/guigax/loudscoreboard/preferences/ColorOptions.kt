@@ -12,7 +12,7 @@ object ColorOptions {
         android.R.color.holo_red_light,
     )
 
-    fun colorFromContext(context: Context): Array<String> {
+    fun colorNamesFromContext(context: Context): Array<String> {
         return arrayOf(
             context.getString(R.string.color_light_blue),
             context.getString(R.string.color_purple),

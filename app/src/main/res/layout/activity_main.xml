@@ -26,7 +26,8 @@
             android:textStyle="bold"
             android:layout_weight="0.1"
             android:paddingTop="20dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:ignore="NestedWeights" />
 
         <!-- Team 1 Score -->
         <TextView
@@ -41,6 +42,7 @@
             tools:ignore="HardcodedText" />
 
         <LinearLayout
+            android:id="@+id/team1ButtonsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
@@ -87,7 +89,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="@android:color/holo_purple">
+        android:background="@android:color/holo_orange_light">
 
         <!-- Team 2 Name -->
         <TextView
@@ -99,7 +101,8 @@
             android:textStyle="bold"
             android:layout_weight="0.1"
             android:paddingTop="20dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:ignore="NestedWeights" />
 
         <!-- Team 2 Score -->
         <TextView
@@ -114,6 +117,7 @@
             tools:ignore="HardcodedText" />
 
         <LinearLayout
+            android:id="@+id/team2ButtonsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
@@ -128,6 +132,14 @@
                 android:textAlignment="center"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/highlight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/highlight"
+                android:src="@drawable/highlight" />
             <ImageView
                 android:id="@+id/whistle"
                 android:layout_width="wrap_content"
