@@ -35,8 +35,8 @@ class TTS(
         if (i == TextToSpeech.SUCCESS) {
             val result: Int = tts.setLanguage(Locale.getDefault())
 
-            tts.setSpeechRate(DataCoordinator.shared.ttsSpeedRateVariable)
-            tts.setPitch(DataCoordinator.shared.ttsPitchVariable)
+            tts.setSpeechRate(DataCoordinator.shared.ttsSpeedRatePref)
+            tts.setPitch(DataCoordinator.shared.ttsPitchPref)
 
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(activity, "This Language is not supported", Toast.LENGTH_SHORT)
