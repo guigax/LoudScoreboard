@@ -24,4 +24,5 @@
     <string name="highlight">Habilitar modo de alto contraste</string>
     <string name="tts_pitch">Tom</string>
     <string name="tts_speed_rate">Velocidade de fala</string>
+    <string name="custom_tts_phrase_spinner">Frase de anúncio</string>
 </resources>

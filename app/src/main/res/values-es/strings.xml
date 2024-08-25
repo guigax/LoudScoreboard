@@ -24,4 +24,5 @@
     <string name="highlight">Habilitar el modo de alto contraste</string>
     <string name="tts_pitch">Tono</string>
     <string name="tts_speed_rate">Velocidad de voz</string>
+    <string name="custom_tts_phrase_spinner">Frase de anuncio</string>
 </resources>

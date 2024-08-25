@@ -14,60 +14,62 @@
             android:id="@+id/paletteLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/team1DefaultName"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <EditText
-            android:id="@+id/team1Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:autofillHints="Name for the Team 1"
-            android:hint="@string/enter_name_for_team_1"
-            android:inputType="text"
-            android:maxLines="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/team1DefaultName"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/team1Color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="@string/color_for_team_1"
-            android:textColor="@color/black" />
+            <EditText
+                android:id="@+id/team1Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints="Name for the Team 1"
+                android:hint="@string/enter_name_for_team_1"
+                android:inputType="text"
+                android:maxLines="1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/team1DefaultName"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <Button
+                android:id="@+id/team1Color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:text="@string/color_for_team_1"
+                android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/team2Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:autofillHints="Name for Team 2"
-            android:hint="@string/enter_name_for_team_2"
-            android:inputType="text"
-            android:maxLines="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/team1DefaultName"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/team2Color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@android:color/holo_orange_light"
-            android:text="@string/color_for_team_2"
-            android:textColor="@color/black" />
+            <EditText
+                android:id="@+id/team2Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints="Name for Team 2"
+                android:hint="@string/enter_name_for_team_2"
+                android:inputType="text"
+                android:maxLines="1" />
+
+            <Button
+                android:id="@+id/team2Color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@android:color/holo_orange_light"
+                android:text="@string/color_for_team_2"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -97,7 +99,8 @@
             android:id="@+id/textToSpeechLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,6 +142,27 @@
                 android:text="@string/mute" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/scoreLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/custom_tts_phrase_spinner"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/custom_phrases"
+                android:textSize="18sp" />
+        </LinearLayout>
+
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/toggleGroup"
             android:layout_width="match_parent"
@@ -156,12 +180,15 @@
                 app:iconPadding="0dp"
                 app:iconSize="24dp" />
 
-            <!--<Button
+            <Button
                 style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/score" />-->
+                app:icon="@drawable/score"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="24dp" />
 
             <Button
                 android:id="@+id/textToSpeechButton"

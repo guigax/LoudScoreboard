@@ -22,5 +22,17 @@
     <string name="color_light_red">Light Red</string>
     <string name="highlight">Enable high contrast mode</string>
     <string name="tts_pitch">Pitch</string>
-    <string name="tts_speed_rate">Speed Rate</string>
+    <string name="tts_speed_rate">Speed rate</string>
+    <string-array name="custom_phrases">
+        <item>team1CurrentScore to team1Name. For, team2CurrentScore to team2Name</item>
+        <item>team2CurrentScore to team2Name. For, team1CurrentScore to team1Name</item>
+        <item>teamAheadScore to teamAhead. For, teamBehindScore to teamBehind</item>
+        <item>teamBehindScore to teamBehind. For, teamAheadScore to teamAheadScore</item>
+        <item>teamThatJustScoredScore to teamThatJustScore. For, teamThatWasScoredScore to teamThatWasScored</item>
+        <item>teamThatWasScoredScore to teamThatWasScored. For, teamThatJustScoredScore to teamThatJustScore</item>
+        <item>teamThatJustScoredScore to teamThatWasScoredScore for teamThatJustScore</item>
+        <item>teamAheadScore to teamBehindScore for teamAhead</item>
+        <item>Custom phrase</item>
+    </string-array>
+    <string name="custom_tts_phrase_spinner">Announce phrase</string>
 </resources>
