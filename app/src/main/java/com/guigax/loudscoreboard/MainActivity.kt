@@ -61,10 +61,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var settingsV: ImageView
 
     private lateinit var audioManager: AudioManager
-    //private lateinit var vibratorManager: VibratorManager
-
     private lateinit var mediaPlayer: MediaPlayer
-    //private lateinit var vibrator: Vibrator
 
     private var team1CurrentName = ""
     private var team2CurrentName = ""
@@ -74,6 +71,7 @@ class MainActivity : AppCompatActivity() {
     private var team2CurrentColor = android.R.color.holo_orange_light
     private var isMuted = false
     private var currentTTSDelay = DEFAULT_DURATION_INCREASE_SCORE
+    private var allowUpdateTTSDelay = true
 
     private var ttsQueue: LinkedList<String> = LinkedList<String>()
     private val handler = Handler()
@@ -91,7 +89,6 @@ class MainActivity : AppCompatActivity() {
             .setOnAudioFocusChangeListener { }
             .build()
 
-    //@RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -100,8 +97,6 @@ class MainActivity : AppCompatActivity() {
         setupCoordinators()
 
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        //vibratorManager = getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-        //vibrator = vibratorManager.defaultVibrator
         mediaPlayer = MediaPlayer.create(this, R.raw.whistle)
 
         setListeners()
@@ -177,18 +172,16 @@ class MainActivity : AppCompatActivity() {
         resetV.setOnLongClickListener {
             resetTeamsNames()
             resetScore()
-            //vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
             return@setOnLongClickListener true
         }
         announceV.setOnClickListener {
-            currentTTSDelay = DURATION_NOW
+            updateTTSDelay(DURATION_NOW)
             announceScore()
         }
         swapV.setOnClickListener { swapScores() }
         swapV.setOnLongClickListener {
             swapTeamsNames()
             swapScores()
-            //vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
             return@setOnLongClickListener true
         }
         settingsV.setOnClickListener { showSettingsDialog() }
@@ -200,6 +193,7 @@ class MainActivity : AppCompatActivity() {
                 TTS(this@MainActivity, ttsQueue.last, audioManager)
             }
             ttsQueue.clear()
+            allowUpdateTTSDelay = true
         }
         handler.postDelayed(runnable!!, currentTTSDelay.toMillis())
     }
@@ -285,6 +279,7 @@ class MainActivity : AppCompatActivity() {
             1 -> team1CurrentScore++
             2 -> team2CurrentScore++
         }
+        updateTTSDelay(DEFAULT_DURATION_INCREASE_SCORE)
         updateScores()
     }
 
@@ -293,7 +288,7 @@ class MainActivity : AppCompatActivity() {
             1 -> if (team1CurrentScore > 0) team1CurrentScore--
             2 -> if (team2CurrentScore > 0) team2CurrentScore--
         }
-        currentTTSDelay = DEFAULT_DURATION_DECREASE_SCORE
+        updateTTSDelay(DEFAULT_DURATION_DECREASE_SCORE)
         updateScores()
     }
 
@@ -341,6 +336,18 @@ class MainActivity : AppCompatActivity() {
         scheduleTTS()
     }
 
+    private fun updateTTSDelay(newDelay: Duration) {
+        if (!allowUpdateTTSDelay) {
+            return
+        }
+
+        if (newDelay == DEFAULT_DURATION_DECREASE_SCORE) {
+            allowUpdateTTSDelay = false
+        }
+
+        currentTTSDelay = newDelay
+    }
+
     private fun showSettingsDialog() {
         val settingsFragment = SettingsFragment()
         settingsFragment.show(supportFragmentManager, settingsFragment.tag)
@@ -383,6 +390,7 @@ class MainActivity : AppCompatActivity() {
                 R.color.green_screen
             )
         )
+        team1ScoreV.isEnabled = false
 
         team2Layout.setBackgroundTintList(
             ContextCompat.getColorStateList(
@@ -405,6 +413,7 @@ class MainActivity : AppCompatActivity() {
                 R.color.princess_peach
             )
         )
+        team2ScoreV.isEnabled = false
 
         // Revert state
         Handler(Looper.getMainLooper()).postDelayed({
@@ -435,6 +444,7 @@ class MainActivity : AppCompatActivity() {
                 R.color.black
             )
         )
+        team1ScoreV.isEnabled = true
 
         team2ButtonsLayout.visibility = View.VISIBLE
         team2ScoreV.textSize = 150f
@@ -451,6 +461,7 @@ class MainActivity : AppCompatActivity() {
                 R.color.black
             )
         )
+        team2ScoreV.isEnabled = true
     }
 
     private fun setupCoordinators() {
